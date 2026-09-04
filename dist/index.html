@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sobriety Date Calculator | Committed for iPhone and Apple Watch</title>
+  <meta name="description" content="Calculate your sober time and next milestone privately in your browser. Committed tracks sobriety on iPhone and Apple Watch with no account or subscription.">
+  <meta name="theme-color" content="#101617">
+  <meta name="apple-itunes-app" content="app-id=6783140621">
+  <link rel="canonical" href="https://davejabe.github.io/committed-site/">
+  <link rel="alternate" hreflang="en" href="https://davejabe.github.io/committed-site/">
+  <link rel="alternate" hreflang="es" href="https://davejabe.github.io/committed-site/es/">
+  <link rel="icon" href="/committed-site/icon-1024.png">
+  <link rel="apple-touch-icon" href="/committed-site/icon-1024.png">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Sobriety Date Calculator | Committed">
+  <meta property="og:description" content="Calculate your sober time and next milestone privately in your browser.">
+  <meta property="og:url" content="https://davejabe.github.io/committed-site/">
+  <meta property="og:image" content="https://davejabe.github.io/committed-site/icon-1024.png">
+  <meta property="og:image:width" content="1024">
+  <meta property="og:image:height" content="1024">
+  <meta name="twitter:card" content="summary">
+  <link rel="stylesheet" href="/committed-site/styles.css">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Committed: Sobriety Tracker",
+    "applicationCategory": "LifestyleApplication",
+    "operatingSystem": "iOS, watchOS",
+    "url": "https://apps.apple.com/us/app/committed-sobriety-tracker/id6783140621",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD",
+      "description": "Free to download with a $4.99 Lifetime Unlock"
+    },
+    "author": {
+      "@type": "Person",
+      "name": "David Jabech"
+    }
+  }
+  </script>
+</head>
+<body>
+  <header class="site-header">
+    <nav class="nav shell" aria-label="Main navigation">
+      <a class="brand" href="/committed-site/">
+        <img src="/committed-site/icon-1024.png" alt="">
+        <span>Committed</span>
+      </a>
+      <div class="nav-links">
+        <a href="#calculator">Calculator</a>
+        <a href="/committed-site/apple-watch-sobriety-counter/">Apple Watch</a>
+        <a href="https://apps.apple.com/us/app/committed-sobriety-tracker/id6783140621">App Store</a>
+        <a class="language-link" href="/committed-site/es/" lang="es">Español</a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section class="intro shell">
+      <p class="eyebrow">Sobriety date calculator</p>
+      <h1>See exactly how long it’s been.</h1>
+      <p class="intro-copy">Enter the date and time you started. The calculation happens in your browser. Nothing is saved or sent.</p>
+    </section>
+
+    <section class="calculator-wrap shell" id="calculator" aria-labelledby="calculator-heading">
+      <div class="calculator">
+        <form class="calculator-form" data-sobriety-calculator>
+          <h2 id="calculator-heading">Enter your start date</h2>
+          <p class="form-note">Use the exact time if you know it, or leave the time at midnight.</p>
+
+          <div class="field-grid">
+            <div class="field">
+              <label for="start-date">Start date</label>
+              <input id="start-date" name="start-date" type="date" required autocomplete="off">
+            </div>
+            <div class="field">
+              <label for="start-time">Start time</label>
+              <input id="start-time" name="start-time" type="time" value="00:00" autocomplete="off">
+            </div>
+          </div>
+
+          <button class="calculate-button" type="submit">Calculate my time</button>
+          <p class="form-error" data-error role="alert"></p>
+          <p class="privacy-note"><span class="privacy-mark" aria-hidden="true"></span><span>Your date never leaves this page. The calculator does not store it.</span></p>
+        </form>
+
+        <div class="calculator-results" aria-live="polite" aria-atomic="true">
+          <p class="result-empty" data-result-empty>Choose a date to see your total days, calendar time, and next common milestone.</p>
+          <div class="result-content" data-result-content hidden>
+            <p class="result-kicker">Time since your date</p>
+            <span class="day-number" data-total-days>0</span>
+            <p class="day-label" data-day-label>full days</p>
+            <p class="result-detail" data-breakdown></p>
+            <p class="result-date" data-since></p>
+            <div class="next-milestone">
+              <p class="next-label" data-next-label></p>
+              <p class="next-date" data-next-date></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="content-section">
+      <div class="section-grid shell">
+        <div>
+          <p class="eyebrow">Committed for iPhone and Apple Watch</p>
+          <h2>Keep your progress somewhere you’ll see it.</h2>
+        </div>
+        <div class="section-copy">
+          <p>Committed tracks the time since a date, your milestones, and more than one commitment. It works on iPhone and Apple Watch, including widgets and complications.</p>
+          <p>You can use it without creating an account. The app does not contain ads, analytics, or a social feed. Lifetime Unlock costs $4.99 in the United States and does not renew.</p>
+          <div class="button-row">
+            <a class="button-primary" href="https://apps.apple.com/us/app/committed-sobriety-tracker/id6783140621">View on the App Store</a>
+            <a class="button-secondary" href="/committed-site/privacy.html">Read the privacy policy</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="content-section">
+      <div class="watch-grid shell">
+        <div class="watch-image">
+          <img src="/committed-site/committed-apple-watch.png" alt="An Apple Watch showing a Committed sobriety counter complication" width="1672" height="941" loading="lazy">
+        </div>
+        <div>
+          <p class="eyebrow">On your wrist</p>
+          <h2>Your count without opening the app.</h2>
+          <div class="section-copy">
+            <p>The Apple Watch app shows your commitments and milestones. Complications can keep the count on your watch face throughout the day.</p>
+            <p><a href="/committed-site/apple-watch-sobriety-counter/">See how Committed works on Apple Watch</a></p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="content-section">
+      <div class="section-grid shell">
+        <div>
+          <p class="eyebrow">Private by design</p>
+          <h2>Your commitments are not developer data.</h2>
+        </div>
+        <div>
+          <dl class="fact-list">
+            <div class="fact">
+              <dt>On your device</dt>
+              <dd>Your commitments, dates, milestones, and settings are stored locally.</dd>
+            </div>
+            <div class="fact">
+              <dt>In your iCloud</dt>
+              <dd>If you enable backup, the app uses your private iCloud account. The developer cannot view or retrieve it.</dd>
+            </div>
+            <div class="fact">
+              <dt>Collected by Committed</dt>
+              <dd>Nothing. There are no analytics, advertising identifiers, or developer servers.</dd>
+            </div>
+          </dl>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="shell">
+      <div class="footer-grid">
+        <span>© 2026 David Jabech</span>
+        <div class="footer-links">
+          <a href="/committed-site/support.html">Support</a>
+          <a href="/committed-site/privacy.html">Privacy</a>
+          <a href="/committed-site/es/" lang="es">Español</a>
+        </div>
+      </div>
+      <p class="disclaimer">Committed and this calculator track elapsed time. They do not provide medical advice or treatment.</p>
+    </div>
+  </footer>
+
+  <script src="/committed-site/calculator.js" defer></script>
+</body>
+</html>
