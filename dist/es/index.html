@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Calculadora de Sobriedad | Committed para iPhone y Apple Watch</title>
+  <title>Calculadora de Sobriedad | Committed</title>
   <meta name="description" content="Calcula tus días de sobriedad y tu próximo hito de forma privada. Committed registra tu progreso en iPhone y Apple Watch sin cuenta ni suscripción.">
   <meta name="theme-color" content="#101617">
   <meta name="apple-itunes-app" content="app-id=6783140621">
@@ -51,7 +51,7 @@
         "name": "¿Committed es una suscripción?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "No. Puedes probar Committed gratis. Lifetime Unlock es una compra única de US$4.99 en Estados Unidos."
+          "text": "No. Puedes usar Committed gratis, sin límite de tiempo. Lifetime Unlock es una compra opcional de US$4.99 en Estados Unidos que añade funciones premium."
         }
       },
       {
@@ -59,7 +59,7 @@
         "name": "¿Committed funciona en Apple Watch?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Sí. Committed incluye una app para Apple Watch y complicaciones para carátulas compatibles."
+          "text": "Sí. Lifetime Unlock incluye una app para Apple Watch y complicaciones para esferas compatibles."
         }
       }
     ]
@@ -75,7 +75,8 @@
       </a>
       <div class="nav-links">
         <a href="#calculadora">Calculadora</a>
-        <a href="/committed-site/apple-watch-sobriety-counter/">Apple Watch</a>
+        <a href="/committed-site/es/app-sobriedad-iphone/">App para iPhone</a>
+        <a href="/committed-site/apple-watch-sobriety-counter/" hreflang="en">Apple Watch (inglés)</a>
         <a href="https://apps.apple.com/app/apple-store/id6783140621?pt=122931649&amp;ct=committed-site-es&amp;mt=8">App Store</a>
         <a class="language-link" href="/committed-site/" lang="en">English</a>
       </div>
@@ -83,26 +84,22 @@
   </header>
 
   <main>
-    <section class="intro shell">
-      <p class="eyebrow">Calculadora de días de sobriedad</p>
-      <h1>Calcula cuánto tiempo ha pasado.</h1>
-      <p class="intro-copy">Ingresa la fecha y, si la sabes, la hora en que comenzaste. El cálculo se hace en tu navegador. La fecha no se guarda ni se envía.</p>
+    <section class="intro calculator-intro shell">
+      <p class="eyebrow">Una herramienta gratuita de Committed</p>
+      <h1>Calculadora de sobriedad</h1>
+      <p class="intro-copy">Elige tu fecha de sobriedad para ver tus días y tu próximo hito.</p>
     </section>
 
     <section class="calculator-wrap shell" id="calculadora" aria-labelledby="calculator-heading">
       <div class="calculator">
         <form class="calculator-form" data-sobriety-calculator>
           <h2 id="calculator-heading">Ingresa tu fecha de inicio</h2>
-          <p class="form-note">Usa la hora exacta si la sabes. De lo contrario, deja la hora en medianoche.</p>
 
           <div class="field-grid">
             <div class="field">
               <label for="start-date">Fecha de inicio</label>
               <input id="start-date" name="start-date" type="date" required autocomplete="off">
-            </div>
-            <div class="field">
-              <label for="start-time">Hora de inicio</label>
-              <input id="start-time" name="start-time" type="time" value="00:00" autocomplete="off">
+              <button class="date-picker-button" type="button" data-date-picker aria-controls="start-date" hidden>Elegir en el calendario</button>
             </div>
           </div>
 
@@ -112,20 +109,28 @@
         </form>
 
         <div class="calculator-results" aria-live="polite" aria-atomic="true">
-          <p class="result-empty" data-result-empty>Elige una fecha para ver tus días completos, el tiempo transcurrido y tu próximo hito común.</p>
+          <p class="result-empty" data-result-empty>Elige una fecha para ver tus días, el tiempo transcurrido y tu próximo hito común.</p>
           <div class="result-content" data-result-content hidden>
             <p class="result-kicker">Tiempo desde tu fecha</p>
             <span class="day-number" data-total-days>0</span>
-            <p class="day-label" data-day-label>días completos</p>
+            <p class="day-label" data-day-label>días</p>
             <p class="result-detail" data-breakdown></p>
             <p class="result-date" data-since></p>
             <div class="next-milestone">
               <p class="next-label" data-next-label></p>
               <p class="next-date" data-next-date></p>
             </div>
+            <p class="result-app-link"><a class="button-primary" href="https://apps.apple.com/app/apple-store/id6783140621?pt=122931649&amp;ct=committed-site-es&amp;mt=8">Lleva tu cuenta en el teléfono</a></p>
+            <p class="purchase-note">Gratis, con funciones premium opcionales.</p>
           </div>
         </div>
       </div>
+    </section>
+
+    <section class="calculator-method shell" aria-labelledby="method-heading">
+      <h2 id="method-heading">Cómo se calcula tu tiempo de sobriedad</h2>
+      <p>El total cuenta los días del calendario entre tu fecha de inicio y hoy. La fecha de inicio es el día cero. El desglose muestra años, meses y días, teniendo en cuenta la duración de cada mes. Se usa la zona horaria de tu dispositivo; los cambios de horario de verano no alteran la cuenta.</p>
+      <p>El próximo hito puede ser un número de días o un aniversario del calendario. Un mes no siempre equivale a 30 días. Tú eliges la fecha de inicio; la calculadora no decide qué fecha de sobriedad debes usar.</p>
     </section>
 
     <section class="content-section">
@@ -136,10 +141,10 @@
         </div>
         <div class="section-copy">
           <p>Committed registra el tiempo desde una fecha, tus hitos y más de un compromiso. Funciona en iPhone y Apple Watch, e incluye widgets y complicaciones.</p>
-          <p>Puedes usarla sin crear una cuenta. La app no contiene anuncios, no usa herramientas de análisis y no incluye una red social. Lifetime Unlock se compra una sola vez. En Estados Unidos cuesta US$4.99.</p>
+          <p>Puedes usarla sin crear una cuenta. La app no contiene anuncios, no usa herramientas de análisis y no incluye una red social. El seguimiento es gratis y sin límite de tiempo. Lifetime Unlock añade funciones premium con una compra opcional de US$4.99 en Estados Unidos.</p>
           <div class="button-row">
             <a class="button-primary" href="https://apps.apple.com/app/apple-store/id6783140621?pt=122931649&amp;ct=committed-site-es&amp;mt=8">Ver en el App Store</a>
-            <a class="button-secondary" href="/committed-site/es/privacidad.html">Leer la política de privacidad</a>
+            <a class="button-secondary" href="/committed-site/es/app-sobriedad-iphone/">Conocer la app para iPhone</a>
           </div>
         </div>
       </div>
@@ -148,7 +153,7 @@
     <section class="content-section">
       <div class="watch-grid shell">
         <div class="watch-image">
-          <img src="/committed-site/committed-apple-watch.png" alt="Un Apple Watch con un contador de sobriedad de Committed" width="1672" height="941" loading="lazy">
+          <img src="/committed-site/assets/committed-watch-960.webp" srcset="/committed-site/assets/committed-watch-480.webp 480w, /committed-site/assets/committed-watch-960.webp 960w, /committed-site/assets/committed-watch-1440.webp 1440w" sizes="(max-width: 820px) calc(100vw - 40px), 540px" alt="Un Apple Watch con un contador de sobriedad de Committed" width="1440" height="810" loading="lazy" decoding="async">
         </div>
         <div>
           <p class="eyebrow">En tu muñeca</p>
@@ -203,11 +208,11 @@
             </div>
             <div class="fact">
               <dt>¿Es una suscripción?</dt>
-              <dd>No. Puedes probar Committed gratis. Lifetime Unlock es una compra única de US$4.99 en Estados Unidos.</dd>
+              <dd>No. Puedes usar Committed gratis, sin límite de tiempo. Lifetime Unlock es una compra opcional de US$4.99 en Estados Unidos que añade funciones premium.</dd>
             </div>
             <div class="fact">
               <dt>¿Funciona en Apple Watch?</dt>
-              <dd>Sí. Committed incluye una app para Apple Watch y complicaciones para carátulas compatibles.</dd>
+              <dd>Sí. Lifetime Unlock incluye una app para Apple Watch y complicaciones para esferas compatibles.</dd>
             </div>
           </dl>
         </div>
@@ -220,6 +225,7 @@
       <div class="footer-grid">
         <span>© 2026 David Jabech</span>
         <div class="footer-links">
+          <a href="/committed-site/es/app-sobriedad-iphone/">App para iPhone</a>
           <a href="/committed-site/es/soporte.html">Soporte</a>
           <a href="/committed-site/es/privacidad.html">Privacidad</a>
           <a href="/committed-site/" lang="en">English</a>

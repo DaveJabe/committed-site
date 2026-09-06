@@ -6,7 +6,7 @@
   const locale = language === "es" ? "es-MX" : "en-US";
   const dayMs = 24 * 60 * 60 * 1000;
   const dateInput = form.querySelector("[name='start-date']");
-  const timeInput = form.querySelector("[name='start-time']");
+  const pickerButton = form.querySelector("[data-date-picker]");
   const error = form.querySelector("[data-error]");
   const empty = document.querySelector("[data-result-empty]");
   const content = document.querySelector("[data-result-content]");
@@ -22,12 +22,12 @@
       required: "Choose a start date first.",
       invalid: "That date could not be read. Try entering it again.",
       future: "The start date needs to be in the past.",
-      day: "full day",
-      days: "full days",
+      day: "day",
+      days: "days",
       since: "Since {date}",
       next: "Next: {name}",
       arrives: "{date}, in {distance}",
-      lessMinute: "less than a minute",
+      zeroDays: "0 days",
       oneDay: "1 day",
       oneWeek: "1 week",
       thirtyDays: "30 days",
@@ -43,21 +43,19 @@
       units: {
         year: ["year", "years"],
         month: ["month", "months"],
-        day: ["day", "days"],
-        hour: ["hour", "hours"],
-        minute: ["minute", "minutes"]
+        day: ["day", "days"]
       }
     },
     es: {
       required: "Elige primero una fecha de inicio.",
       invalid: "No se pudo leer esa fecha. Intenta ingresarla de nuevo.",
       future: "La fecha de inicio debe estar en el pasado.",
-      day: "día completo",
-      days: "días completos",
+      day: "día",
+      days: "días",
       since: "Desde el {date}",
       next: "Próximo: {name}",
       arrives: "{date}, dentro de {distance}",
-      lessMinute: "menos de un minuto",
+      zeroDays: "0 días",
       oneDay: "1 día",
       oneWeek: "1 semana",
       thirtyDays: "30 días",
@@ -73,9 +71,7 @@
       units: {
         year: ["año", "años"],
         month: ["mes", "meses"],
-        day: ["día", "días"],
-        hour: ["hora", "horas"],
-        minute: ["minuto", "minutos"]
+        day: ["día", "días"]
       }
     }
   }[language];
@@ -83,6 +79,27 @@
   const pad = (number) => String(number).padStart(2, "0");
   const today = new Date();
   dateInput.max = `${today.getFullYear()}-${pad(today.getMonth() + 1)}-${pad(today.getDate())}`;
+
+  if (pickerButton && typeof dateInput.showPicker === "function") {
+    pickerButton.hidden = false;
+    pickerButton.addEventListener("click", () => {
+      try {
+        dateInput.showPicker();
+      } catch {
+        dateInput.focus();
+      }
+    });
+  }
+
+  // Compare calendar dates, so daylight-saving changes do not lose or add a day.
+  function calendarDays(start, end) {
+    const serial = (date) => {
+      const utc = new Date(0);
+      utc.setUTCFullYear(date.getFullYear(), date.getMonth(), date.getDate());
+      return utc.getTime() / dayMs;
+    };
+    return serial(end) - serial(start);
+  }
 
   function daysInMonth(year, month) {
     return new Date(year, month + 1, 0).getDate();
@@ -128,14 +145,11 @@
       days += 1;
     }
 
-    const remainingMinutes = Math.max(0, Math.floor((end - cursor) / 60000));
-    const hours = Math.floor(remainingMinutes / 60);
-    const minutes = remainingMinutes % 60;
-    return { years, months, days, hours, minutes };
+    return { years, months, days };
   }
 
   function formatParts(parts, limit = 3) {
-    const ordered = ["year", "month", "day", "hour", "minute"];
+    const ordered = ["year", "month", "day"];
     const items = ordered
       .filter((unit) => parts[`${unit}s`] > 0)
       .slice(0, limit)
@@ -145,21 +159,17 @@
         return `${new Intl.NumberFormat(locale).format(value)} ${value === 1 ? forms[0] : forms[1]}`;
       });
 
-    if (!items.length) return words.lessMinute;
+    if (!items.length) return words.zeroDays;
     return new Intl.ListFormat(locale, { style: "long", type: "conjunction" }).format(items);
-  }
-
-  function countdownParts(milliseconds) {
-    const totalMinutes = Math.max(0, Math.floor(milliseconds / 60000));
-    const days = Math.floor(totalMinutes / 1440);
-    const hours = Math.floor((totalMinutes % 1440) / 60);
-    const minutes = totalMinutes % 60;
-    return { years: 0, months: 0, days, hours, minutes };
   }
 
   function nextMilestone(start, now) {
     const elapsed = now - start;
-    const dayCandidate = (days, name) => ({ name, date: new Date(start.getTime() + days * dayMs) });
+    const dayCandidate = (days, name) => {
+      const date = new Date(start);
+      date.setDate(date.getDate() + days);
+      return { name, date };
+    };
     const candidates = [
       dayCandidate(1, words.oneDay),
       dayCandidate(7, words.oneWeek),
@@ -190,16 +200,14 @@
 
   function render(start) {
     const now = new Date();
-    const milliseconds = now - start;
-    const totalDays = Math.floor(milliseconds / dayMs);
+    now.setHours(0, 0, 0, 0);
+    const totalDays = calendarDays(start, now);
     const breakdown = calendarBreakdown(start, now);
     const milestone = nextMilestone(start, now);
     const dateFormatter = new Intl.DateTimeFormat(locale, {
       year: "numeric",
       month: "long",
-      day: "numeric",
-      hour: "numeric",
-      minute: "2-digit"
+      day: "numeric"
     });
     const milestoneFormatter = new Intl.DateTimeFormat(locale, {
       year: "numeric",
@@ -214,7 +222,7 @@
     nextLabel.textContent = words.next.replace("{name}", milestone.name);
     nextDate.textContent = words.arrives
       .replace("{date}", milestoneFormatter.format(milestone.date))
-      .replace("{distance}", formatParts(countdownParts(milestone.date - now), 2));
+      .replace("{distance}", formatParts({ days: calendarDays(now, milestone.date) }));
 
     empty.hidden = true;
     content.hidden = false;
@@ -230,9 +238,9 @@
       return;
     }
 
-    const time = timeInput.value || "00:00";
-    const start = new Date(`${dateInput.value}T${time}`);
-    if (Number.isNaN(start.getTime())) {
+    const start = new Date(`${dateInput.value}T00:00`);
+    const [year, month, day] = dateInput.value.split("-").map(Number);
+    if (Number.isNaN(start.getTime()) || start.getFullYear() !== year || start.getMonth() + 1 !== month || start.getDate() !== day) {
       error.textContent = words.invalid;
       return;
     }

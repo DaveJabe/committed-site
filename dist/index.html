@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Sobriety Date Calculator | Committed for iPhone and Apple Watch</title>
+  <title>Sobriety Date Calculator | Committed</title>
   <meta name="description" content="Calculate your sober time and next milestone privately in your browser. Committed tracks sobriety on iPhone and Apple Watch with no account or subscription.">
   <meta name="theme-color" content="#101617">
   <meta name="apple-itunes-app" content="app-id=6783140621">
@@ -37,7 +37,7 @@
       "@type": "Offer",
       "price": "0",
       "priceCurrency": "USD",
-      "description": "Free to download with a $4.99 Lifetime Unlock"
+      "description": "Free to use with no time limit. Optional premium features are available with a one-time $4.99 Lifetime Unlock in the United States."
     },
     "author": {
       "@type": "Person",
@@ -71,7 +71,7 @@
         "name": "Is Committed a subscription?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "No. Committed is free to try. Lifetime Unlock is a one-time $4.99 purchase in the United States."
+          "text": "No. Committed is free to use, with no time limit. Lifetime Unlock is an optional one-time $4.99 purchase for premium features in the United States."
         }
       },
       {
@@ -79,7 +79,7 @@
         "name": "Does Committed work on Apple Watch?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Yes. Committed includes an Apple Watch app and complications for supported watch faces."
+          "text": "Yes. Lifetime Unlock includes an Apple Watch app and complications for supported watch faces."
         }
       }
     ]
@@ -95,6 +95,7 @@
       </a>
       <div class="nav-links">
         <a href="#calculator">Calculator</a>
+        <a href="/committed-site/sobriety-tracker-iphone/">iPhone app</a>
         <a href="/committed-site/apple-watch-sobriety-counter/">Apple Watch</a>
         <a href="https://apps.apple.com/app/apple-store/id6783140621?pt=122931649&amp;ct=committed-site-home&amp;mt=8">App Store</a>
         <a class="language-link" href="/committed-site/es/" lang="es">Español</a>
@@ -103,26 +104,22 @@
   </header>
 
   <main>
-    <section class="intro shell">
-      <p class="eyebrow">Sobriety date calculator</p>
-      <h1>See exactly how long it’s been.</h1>
-      <p class="intro-copy">Enter the date and time you started. The calculation happens in your browser. Nothing is saved or sent.</p>
+    <section class="intro calculator-intro shell">
+      <p class="eyebrow">A free tool from Committed</p>
+      <h1>Sobriety date calculator</h1>
+      <p class="intro-copy">Choose your sobriety date to see your days and next milestone.</p>
     </section>
 
     <section class="calculator-wrap shell" id="calculator" aria-labelledby="calculator-heading">
       <div class="calculator">
         <form class="calculator-form" data-sobriety-calculator>
           <h2 id="calculator-heading">Enter your start date</h2>
-          <p class="form-note">Use the exact time if you know it, or leave the time at midnight.</p>
 
           <div class="field-grid">
             <div class="field">
               <label for="start-date">Start date</label>
               <input id="start-date" name="start-date" type="date" required autocomplete="off">
-            </div>
-            <div class="field">
-              <label for="start-time">Start time</label>
-              <input id="start-time" name="start-time" type="time" value="00:00" autocomplete="off">
+              <button class="date-picker-button" type="button" data-date-picker aria-controls="start-date" hidden>Choose from calendar</button>
             </div>
           </div>
 
@@ -136,16 +133,24 @@
           <div class="result-content" data-result-content hidden>
             <p class="result-kicker">Time since your date</p>
             <span class="day-number" data-total-days>0</span>
-            <p class="day-label" data-day-label>full days</p>
+            <p class="day-label" data-day-label>days</p>
             <p class="result-detail" data-breakdown></p>
             <p class="result-date" data-since></p>
             <div class="next-milestone">
               <p class="next-label" data-next-label></p>
               <p class="next-date" data-next-date></p>
             </div>
+            <p class="result-app-link"><a class="button-primary" href="https://apps.apple.com/app/apple-store/id6783140621?pt=122931649&amp;ct=committed-site-home&amp;mt=8">Track it on your phone</a></p>
+            <p class="purchase-note">Free to use. Optional premium features.</p>
           </div>
         </div>
       </div>
+    </section>
+
+    <section class="calculator-method shell" aria-labelledby="method-heading">
+      <h2 id="method-heading">How your sober time is calculated</h2>
+      <p>The day count is the number of calendar days between your start date and today. Your start date is day zero. The breakdown counts years, months, and days, accounting for different month lengths. Dates use your device’s local time zone; daylight-saving changes do not change the day count.</p>
+      <p>Your next milestone may be a set number of days or a calendar anniversary. A month is not always 30 days. You can enter any personal start date; the calculator does not choose a sobriety date for you.</p>
     </section>
 
     <section class="content-section">
@@ -156,10 +161,10 @@
         </div>
         <div class="section-copy">
           <p>Committed tracks the time since a date, your milestones, and more than one commitment. It works on iPhone and Apple Watch, including widgets and complications.</p>
-          <p>You can use it without creating an account. The app does not contain ads, analytics, or a social feed. Lifetime Unlock costs $4.99 in the United States and does not renew.</p>
+          <p>You can use it without creating an account. The app does not contain ads, analytics, or a social feed. Tracking is free with no time limit. The optional Lifetime Unlock adds premium features for a one-time $4.99 purchase in the United States.</p>
           <div class="button-row">
             <a class="button-primary" href="https://apps.apple.com/app/apple-store/id6783140621?pt=122931649&amp;ct=committed-site-home&amp;mt=8">View on the App Store</a>
-            <a class="button-secondary" href="/committed-site/privacy.html">Read the privacy policy</a>
+            <a class="button-secondary" href="/committed-site/sobriety-tracker-iphone/">See the iPhone app</a>
           </div>
         </div>
       </div>
@@ -168,7 +173,7 @@
     <section class="content-section">
       <div class="watch-grid shell">
         <div class="watch-image">
-          <img src="/committed-site/committed-apple-watch.png" alt="An Apple Watch showing a Committed sobriety counter complication" width="1672" height="941" loading="lazy">
+          <img src="/committed-site/assets/committed-watch-960.webp" srcset="/committed-site/assets/committed-watch-480.webp 480w, /committed-site/assets/committed-watch-960.webp 960w, /committed-site/assets/committed-watch-1440.webp 1440w" sizes="(max-width: 820px) calc(100vw - 40px), 540px" alt="An Apple Watch showing a Committed sobriety counter complication" width="1440" height="810" loading="lazy" decoding="async">
         </div>
         <div>
           <p class="eyebrow">On your wrist</p>
@@ -185,7 +190,7 @@
       <div class="section-grid shell">
         <div>
           <p class="eyebrow">Private by design</p>
-          <h2>Your commitments are not developer data.</h2>
+          <h2>Your progress stays with you.</h2>
         </div>
         <div>
           <dl class="fact-list">
@@ -224,11 +229,11 @@
             </div>
             <div class="fact">
               <dt>Is it a subscription?</dt>
-              <dd>No. Committed is free to try. Lifetime Unlock is a one-time $4.99 purchase in the United States.</dd>
+              <dd>No. Committed is free to use, with no time limit. Lifetime Unlock is an optional one-time $4.99 purchase for premium features in the United States.</dd>
             </div>
             <div class="fact">
               <dt>Does it work on Apple Watch?</dt>
-              <dd>Yes. Committed includes an Apple Watch app and complications for supported watch faces.</dd>
+              <dd>Yes. Lifetime Unlock includes an Apple Watch app and complications for supported watch faces.</dd>
             </div>
           </dl>
         </div>
@@ -241,6 +246,7 @@
       <div class="footer-grid">
         <span>© 2026 David Jabech</span>
         <div class="footer-links">
+          <a href="/committed-site/sobriety-tracker-iphone/">iPhone app</a>
           <a href="/committed-site/support.html">Support</a>
           <a href="/committed-site/privacy.html">Privacy</a>
           <a href="/committed-site/es/" lang="es">Español</a>
