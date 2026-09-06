@@ -762,16 +762,13 @@ h1 {
 .header-download {
   order: 3;
   flex: 0 0 auto;
-  flex-direction: column;
-  gap: 2px;
-  min-height: 54px;
-  padding: 9px 16px;
-  line-height: 1.15;
+  min-height: 44px;
+  padding: 10px 14px;
+  border-radius: 10px;
+  font-size: 0.94rem;
+  line-height: 1.3;
   text-align: center;
 }
-
-.header-download span { font-size: 0.875rem; font-weight: 500; }
-.header-download strong { font-size: 1.125rem; }
 
 @media (max-width: 1050px) {
   .download-nav { flex-wrap: wrap; gap: 8px 12px; padding-top: 12px; padding-bottom: 8px; }
