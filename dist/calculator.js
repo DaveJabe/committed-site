@@ -6,7 +6,6 @@
   const locale = language === "es" ? "es-MX" : "en-US";
   const dayMs = 24 * 60 * 60 * 1000;
   const dateInput = form.querySelector("[name='start-date']");
-  const pickerButton = form.querySelector("[data-date-picker]");
   const error = form.querySelector("[data-error]");
   const empty = document.querySelector("[data-result-empty]");
   const content = document.querySelector("[data-result-content]");
@@ -79,17 +78,6 @@
   const pad = (number) => String(number).padStart(2, "0");
   const today = new Date();
   dateInput.max = `${today.getFullYear()}-${pad(today.getMonth() + 1)}-${pad(today.getDate())}`;
-
-  if (pickerButton && typeof dateInput.showPicker === "function") {
-    pickerButton.hidden = false;
-    pickerButton.addEventListener("click", () => {
-      try {
-        dateInput.showPicker();
-      } catch {
-        dateInput.focus();
-      }
-    });
-  }
 
   // Compare calendar dates, so daylight-saving changes do not lose or add a day.
   function calendarDays(start, end) {
