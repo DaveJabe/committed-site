@@ -332,3 +332,21 @@
     margin-top: 20px;
   }
 }
+
+/* iOS 26 WebKit currently miscalculates width:100% on date controls when
+   horizontal padding is applied. Keep the native date control unpadded so
+   its border stays inside its containing block in both orientations. */
+.field input[type="date"] {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  padding-inline: 0 !important;
+  box-sizing: border-box;
+}
+
+@media (max-width: 900px) and (max-height: 520px) {
+  .calculator-form {
+    padding-left: 26px;
+    padding-right: 26px;
+  }
+}
