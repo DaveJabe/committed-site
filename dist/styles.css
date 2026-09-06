@@ -754,6 +754,38 @@ h1 {
   }
 }
 
+.download-nav .nav-links {
+  order: 2;
+  margin-left: auto;
+}
+
+.header-download {
+  order: 3;
+  flex: 0 0 auto;
+  flex-direction: column;
+  gap: 2px;
+  min-height: 54px;
+  padding: 9px 16px;
+  line-height: 1.15;
+  text-align: center;
+}
+
+.header-download span { font-size: 0.875rem; font-weight: 500; }
+.header-download strong { font-size: 1.125rem; }
+
+@media (max-width: 1050px) {
+  .download-nav { flex-wrap: wrap; gap: 8px 12px; padding-top: 12px; padding-bottom: 8px; }
+  .download-nav .header-download { order: 2; margin-left: auto; }
+  .download-nav .nav-links { order: 3; width: 100%; margin-left: 0; flex-wrap: wrap; gap: 4px 16px; }
+  .download-nav .nav-links a { display: inline-flex; align-items: center; min-height: 44px; }
+}
+
+@media (max-width: 560px) {
+  .download-nav .brand { gap: 8px; font-size: 1rem; }
+  .download-nav .brand img { width: 32px; height: 32px; }
+  .header-download { padding: 9px 12px; }
+}
+
 .intro.calculator-intro {
   padding: 26px 0 12px;
 }
