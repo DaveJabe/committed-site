@@ -31,38 +31,10 @@
     "@context": "https://schema.org",
     "@type": "FAQPage",
     "mainEntity": [
-      {
-        "@type": "Question",
-        "name": "¿Qué puedo registrar con Committed?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Puedes registrar la sobriedad, la nicotina, las redes sociales u otro compromiso personal."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "¿Committed requiere una cuenta?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "No. Tu información permanece en tus dispositivos y puede sincronizarse mediante tu cuenta privada de iCloud si activas la copia de seguridad."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "¿Committed es una suscripción?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "No. Puedes usar Committed gratis, sin límite de tiempo. Lifetime Unlock añade funciones premium con una compra opcional de pago único. Consulta el precio en el App Store de tu región."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "¿Committed funciona en Apple Watch?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Sí. Lifetime Unlock incluye una app para Apple Watch y complicaciones para esferas compatibles."
-        }
-      }
+      {"@type": "Question", "name": "¿Qué puedo registrar con Committed?", "acceptedAnswer": {"@type": "Answer", "text": "Puedes registrar la sobriedad, la nicotina, las redes sociales u otro compromiso personal."}},
+      {"@type": "Question", "name": "¿Committed requiere una cuenta?", "acceptedAnswer": {"@type": "Answer", "text": "No. Tu información permanece en tus dispositivos y puede sincronizarse mediante tu cuenta privada de iCloud si activas la copia de seguridad."}},
+      {"@type": "Question", "name": "¿Committed es una suscripción?", "acceptedAnswer": {"@type": "Answer", "text": "No. Puedes usar Committed gratis, sin límite de tiempo. Lifetime Unlock añade funciones premium con una compra opcional de pago único. Consulta el precio en el App Store de tu región."}},
+      {"@type": "Question", "name": "¿Committed funciona en Apple Watch?", "acceptedAnswer": {"@type": "Answer", "text": "Sí. Lifetime Unlock incluye una app para Apple Watch y complicaciones para esferas compatibles."}}
     ]
   }
   </script>
@@ -87,21 +59,28 @@
   <main>
     <section class="intro calculator-intro shell">
       <p class="eyebrow">Una herramienta gratuita de Committed</p>
-      <h1>Calculadora de sobriedad</h1>
+      <div class="calculator-title-row">
+        <h1>Calculadora de sobriedad</h1>
+        <button class="info-button" type="button" popovertarget="calculator-info" aria-label="Cómo funciona la calculadora">i</button>
+      </div>
+      <div class="calculator-info-popover" id="calculator-info" popover>
+        <button class="info-close" type="button" popovertarget="calculator-info" popovertargetaction="hide" aria-label="Cerrar">×</button>
+        <h2>Cómo se calcula tu tiempo de sobriedad</h2>
+        <p>El total cuenta los días del calendario entre tu fecha de inicio y hoy. La fecha de inicio es el día cero. El desglose muestra años, meses y días, teniendo en cuenta la duración de cada mes. Se usa la zona horaria de tu dispositivo; los cambios de horario de verano no alteran la cuenta.</p>
+        <p>El próximo hito puede ser un número de días o un aniversario del calendario. Un mes no siempre equivale a 30 días. Tú eliges la fecha de inicio; la calculadora no decide qué fecha de sobriedad debes usar.</p>
+      </div>
     </section>
 
     <section class="calculator-wrap shell" id="calculadora" aria-labelledby="calculator-heading">
       <div class="calculator">
         <form class="calculator-form" data-sobriety-calculator>
           <h2 id="calculator-heading">Ingresa tu fecha de inicio</h2>
-
           <div class="field-grid">
             <div class="field">
               <label for="start-date">Fecha de inicio</label>
               <input id="start-date" name="start-date" type="date" required autocomplete="off">
             </div>
           </div>
-
           <button class="calculate-button" type="submit">Calcular mi tiempo</button>
           <p class="form-error" data-error role="alert"></p>
           <p class="privacy-note"><span class="privacy-mark" aria-hidden="true"></span><span>Tu fecha nunca sale de esta página. La calculadora no la guarda.</span></p>
@@ -124,12 +103,6 @@
           </div>
         </div>
       </div>
-    </section>
-
-    <section class="calculator-method shell" aria-labelledby="method-heading">
-      <h2 id="method-heading">Cómo se calcula tu tiempo de sobriedad</h2>
-      <p>El total cuenta los días del calendario entre tu fecha de inicio y hoy. La fecha de inicio es el día cero. El desglose muestra años, meses y días, teniendo en cuenta la duración de cada mes. Se usa la zona horaria de tu dispositivo; los cambios de horario de verano no alteran la cuenta.</p>
-      <p>El próximo hito puede ser un número de días o un aniversario del calendario. Un mes no siempre equivale a 30 días. Tú eliges la fecha de inicio; la calculadora no decide qué fecha de sobriedad debes usar.</p>
     </section>
 
     <section class="content-section">
@@ -157,33 +130,19 @@
         <div>
           <p class="eyebrow">En tu muñeca</p>
           <h2>Mira tu cuenta sin abrir la app.</h2>
-          <div class="section-copy">
-            <p>La app para Apple Watch muestra tus compromisos e hitos. Las complicaciones pueden mantener la cuenta en la carátula durante el día.</p>
-          </div>
+          <div class="section-copy"><p>La app para Apple Watch muestra tus compromisos e hitos. Las complicaciones pueden mantener la cuenta en la carátula durante el día.</p></div>
         </div>
       </div>
     </section>
 
     <section class="content-section">
       <div class="section-grid shell">
-        <div>
-          <p class="eyebrow">Privacidad</p>
-          <h2>Tus compromisos se quedan contigo.</h2>
-        </div>
+        <div><p class="eyebrow">Privacidad</p><h2>Tus compromisos se quedan contigo.</h2></div>
         <div>
           <dl class="fact-list">
-            <div class="fact">
-              <dt>En tu dispositivo</dt>
-              <dd>Tus compromisos, fechas, hitos y ajustes se guardan localmente.</dd>
-            </div>
-            <div class="fact">
-              <dt>En tu iCloud</dt>
-              <dd>Si activas la copia de seguridad, la app usa tu cuenta privada de iCloud. El desarrollador no puede ver ni recuperar esa información.</dd>
-            </div>
-            <div class="fact">
-              <dt>Datos recopilados</dt>
-              <dd>Ninguno. Committed no usa analíticas, identificadores publicitarios ni servidores del desarrollador.</dd>
-            </div>
+            <div class="fact"><dt>En tu dispositivo</dt><dd>Tus compromisos, fechas, hitos y ajustes se guardan localmente.</dd></div>
+            <div class="fact"><dt>En tu iCloud</dt><dd>Si activas la copia de seguridad, la app usa tu cuenta privada de iCloud. El desarrollador no puede ver ni recuperar esa información.</dd></div>
+            <div class="fact"><dt>Datos recopilados</dt><dd>Ninguno. Committed no usa analíticas, identificadores publicitarios ni servidores del desarrollador.</dd></div>
           </dl>
         </div>
       </div>
@@ -191,28 +150,13 @@
 
     <section class="content-section" aria-labelledby="preguntas-heading">
       <div class="section-grid shell">
-        <div>
-          <p class="eyebrow">Preguntas frecuentes</p>
-          <h2 id="preguntas-heading">Antes de descargar.</h2>
-        </div>
+        <div><p class="eyebrow">Preguntas frecuentes</p><h2 id="preguntas-heading">Antes de descargar.</h2></div>
         <div>
           <dl class="fact-list">
-            <div class="fact">
-              <dt>¿Qué puedo registrar?</dt>
-              <dd>La sobriedad, la nicotina, las redes sociales u otro compromiso personal.</dd>
-            </div>
-            <div class="fact">
-              <dt>¿Necesito una cuenta?</dt>
-              <dd>No. Tu información permanece en tus dispositivos y puede sincronizarse mediante tu cuenta privada de iCloud si activas la copia de seguridad.</dd>
-            </div>
-            <div class="fact">
-              <dt>¿Es una suscripción?</dt>
-              <dd>No. Puedes usar Committed gratis, sin límite de tiempo. Lifetime Unlock añade funciones premium con una compra opcional de pago único. Consulta el precio en el App Store de tu región.</dd>
-            </div>
-            <div class="fact">
-              <dt>¿Funciona en Apple Watch?</dt>
-              <dd>Sí. Lifetime Unlock incluye una app para Apple Watch y complicaciones para esferas compatibles.</dd>
-            </div>
+            <div class="fact"><dt>¿Qué puedo registrar?</dt><dd>La sobriedad, la nicotina, las redes sociales u otro compromiso personal.</dd></div>
+            <div class="fact"><dt>¿Necesito una cuenta?</dt><dd>No. Tu información permanece en tus dispositivos y puede sincronizarse mediante tu cuenta privada de iCloud si activas la copia de seguridad.</dd></div>
+            <div class="fact"><dt>¿Es una suscripción?</dt><dd>No. Puedes usar Committed gratis, sin límite de tiempo. Lifetime Unlock añade funciones premium con una compra opcional de pago único. Consulta el precio en el App Store de tu región.</dd></div>
+            <div class="fact"><dt>¿Funciona en Apple Watch?</dt><dd>Sí. Lifetime Unlock incluye una app para Apple Watch y complicaciones para esferas compatibles.</dd></div>
           </dl>
         </div>
       </div>
