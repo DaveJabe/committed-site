@@ -7,7 +7,7 @@
   const dayMs = 24 * 60 * 60 * 1000;
   const dateInput = form.querySelector("[name='start-date']");
   const error = form.querySelector("[data-error]");
-  const empty = document.querySelector("[data-result-empty]");
+  const results = document.querySelector(".calculator-results");
   const content = document.querySelector("[data-result-content]");
   const daysValue = document.querySelector("[data-total-days]");
   const daysLabel = document.querySelector("[data-day-label]");
@@ -79,7 +79,6 @@
   const today = new Date();
   dateInput.max = `${today.getFullYear()}-${pad(today.getMonth() + 1)}-${pad(today.getDate())}`;
 
-  // Compare calendar dates, so daylight-saving changes do not lose or add a day.
   function calendarDays(start, end) {
     const serial = (date) => {
       const utc = new Date(0);
@@ -212,7 +211,7 @@
       .replace("{date}", milestoneFormatter.format(milestone.date))
       .replace("{distance}", formatParts({ days: calendarDays(now, milestone.date) }));
 
-    empty.hidden = true;
+    results.hidden = false;
     content.hidden = false;
   }
 
