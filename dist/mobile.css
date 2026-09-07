@@ -20,6 +20,14 @@ body {
   display: none;
 }
 
+.calculator:has(.calculator-results[hidden]) {
+  grid-template-columns: 1fr;
+}
+
+.calculator:has(.calculator-results[hidden]) .calculator-form {
+  border-right: 0;
+}
+
 /* Minimal header */
 .download-nav {
   gap: 16px;
