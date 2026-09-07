@@ -26,18 +26,6 @@
   <meta name="twitter:card" content="summary">
   <link rel="stylesheet" href="/committed-site/styles.css">
   <link rel="stylesheet" href="/committed-site/mobile.css">
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": [
-      {"@type": "Question", "name": "¿Qué puedo registrar con Committed?", "acceptedAnswer": {"@type": "Answer", "text": "Puedes registrar la sobriedad, la nicotina, las redes sociales u otro compromiso personal."}},
-      {"@type": "Question", "name": "¿Committed requiere una cuenta?", "acceptedAnswer": {"@type": "Answer", "text": "No. Tu información permanece en tus dispositivos y puede sincronizarse mediante tu cuenta privada de iCloud si activas la copia de seguridad."}},
-      {"@type": "Question", "name": "¿Committed es una suscripción?", "acceptedAnswer": {"@type": "Answer", "text": "No. Puedes usar Committed gratis, sin límite de tiempo. Lifetime Unlock añade funciones premium con una compra opcional de pago único. Consulta el precio en el App Store de tu región."}},
-      {"@type": "Question", "name": "¿Committed funciona en Apple Watch?", "acceptedAnswer": {"@type": "Answer", "text": "Sí. Lifetime Unlock incluye una app para Apple Watch y complicaciones para esferas compatibles."}}
-    ]
-  }
-  </script>
 </head>
 <body>
   <header class="site-header">
@@ -73,17 +61,15 @@
           <h2 id="calculator-heading">Ingresa tu fecha de inicio</h2>
           <div class="field-grid">
             <div class="field">
-              <label for="start-date">Fecha de inicio</label>
+              <label class="visually-hidden" for="start-date">Fecha de inicio</label>
               <input id="start-date" name="start-date" type="date" required autocomplete="off">
             </div>
           </div>
           <button class="calculate-button" type="submit">Calcular mi tiempo</button>
           <p class="form-error" data-error role="alert"></p>
-          <p class="privacy-note"><span class="privacy-mark" aria-hidden="true"></span><span>Tu fecha nunca sale de esta página. La calculadora no la guarda.</span></p>
         </form>
 
-        <div class="calculator-results" aria-live="polite" aria-atomic="true">
-          <p class="result-empty" data-result-empty>Elige una fecha para ver tus días y tu próximo hito.</p>
+        <div class="calculator-results" aria-live="polite" aria-atomic="true" hidden>
           <div class="result-content" data-result-content hidden>
             <p class="result-kicker">Tiempo desde tu fecha</p>
             <span class="day-number" data-total-days>0</span>
@@ -94,31 +80,22 @@
               <p class="next-label" data-next-label></p>
               <p class="next-date" data-next-date></p>
             </div>
-            <p class="result-app-link"><a class="button-primary" href="https://apps.apple.com/app/apple-store/id6783140621?pt=122931649&amp;ct=committed-site-es&amp;mt=8">Lleva tu cuenta en el teléfono</a></p>
-            <p class="purchase-note">Gratis, con funciones premium opcionales.</p>
           </div>
         </div>
       </div>
     </section>
 
     <section class="app-cta shell" aria-labelledby="app-cta-heading">
-      <div class="app-cta-copy">
-        <p class="eyebrow">Committed para iPhone y Apple Watch</p>
-        <h2 id="app-cta-heading">¿Quieres llevar tu cuenta contigo?</h2>
-        <p>Guarda tu progreso, hitos, widgets y complicaciones de Apple Watch en una sola app privada.</p>
-      </div>
-      <div class="app-cta-actions">
-        <a class="button-primary" href="https://apps.apple.com/app/apple-store/id6783140621?pt=122931649&amp;ct=committed-site-es&amp;mt=8">Ver en el App Store</a>
-        <a class="quiet-link" href="/committed-site/es/app-sobriedad-iphone/">Más información</a>
-      </div>
+      <h2 id="app-cta-heading">¿Quieres llevar tu cuenta contigo?</h2>
+      <a class="button-primary" href="https://apps.apple.com/app/apple-store/id6783140621?pt=122931649&amp;ct=committed-site-es&amp;mt=8">Ver en el App Store</a>
     </section>
 
     <section class="accordion-shell shell" aria-label="Más sobre Committed">
       <details class="info-accordion">
         <summary>¿Qué es Committed?</summary>
         <div class="accordion-content">
-          <p>Committed registra el tiempo desde una fecha, tus hitos y más de un compromiso. Puedes usarla para la sobriedad, la nicotina, las redes sociales u otro compromiso personal.</p>
-          <p>No necesitas una cuenta. No hay red social, anuncios ni analíticas. El seguimiento es gratis y sin límite de tiempo. Lifetime Unlock añade funciones premium con una compra opcional de pago único.</p>
+          <p>Committed registra tiempo, hitos y más de un compromiso personal en iPhone.</p>
+          <p>No requiere cuenta, anuncios, analíticas ni suscripción. Lifetime Unlock añade funciones premium opcionales con una compra de pago único.</p>
           <p><a href="/committed-site/es/app-sobriedad-iphone/">Más información sobre la app para iPhone</a></p>
         </div>
       </details>
@@ -126,7 +103,7 @@
       <details class="info-accordion">
         <summary>Apple Watch</summary>
         <div class="accordion-content">
-          <p>La app para Apple Watch muestra tus compromisos e hitos. Las complicaciones pueden mantener tu cuenta visible en la carátula durante el día.</p>
+          <p>La app para Apple Watch muestra tus compromisos e hitos, y las complicaciones pueden mantener tu cuenta visible en la carátula.</p>
           <p><a href="/committed-site/apple-watch-sobriety-counter/" hreflang="en">Más información sobre Apple Watch</a></p>
         </div>
       </details>
@@ -134,18 +111,8 @@
       <details class="info-accordion">
         <summary>Privacidad</summary>
         <div class="accordion-content">
-          <p>Tus compromisos, fechas, hitos y ajustes se guardan en tu dispositivo. Si activas la copia de seguridad, Committed usa tu cuenta privada de iCloud.</p>
-          <p>Committed no usa analíticas, identificadores publicitarios ni servidores del desarrollador. El desarrollador no puede ver ni recuperar tus compromisos.</p>
-        </div>
-      </details>
-
-      <details class="info-accordion">
-        <summary>Preguntas frecuentes</summary>
-        <div class="accordion-content faq-compact">
-          <p><strong>¿Necesito una cuenta?</strong><br>No.</p>
-          <p><strong>¿Es una suscripción?</strong><br>No. Lifetime Unlock es una compra opcional de pago único.</p>
-          <p><strong>¿Funciona en Apple Watch?</strong><br>Sí. La app para Apple Watch y las complicaciones se incluyen con Lifetime Unlock.</p>
-          <p><strong>¿Qué puedo registrar?</strong><br>La sobriedad, la nicotina, las redes sociales u otro compromiso personal.</p>
+          <p>Esta calculadora funciona en tu navegador y no guarda ni envía la fecha que ingresas.</p>
+          <p>Committed guarda tus datos en tu dispositivo y, si lo activas, en tu cuenta privada de iCloud. No usa analíticas, identificadores publicitarios ni servidores del desarrollador.</p>
         </div>
       </details>
     </section>
