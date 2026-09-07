@@ -55,34 +55,22 @@
       {
         "@type": "Question",
         "name": "What can I track with Committed?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "You can track sobriety, nicotine, social media, or another personal commitment."
-        }
+        "acceptedAnswer": {"@type": "Answer", "text": "You can track sobriety, nicotine, social media, or another personal commitment."}
       },
       {
         "@type": "Question",
         "name": "Does Committed require an account?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "No. Your information stays on your devices and can sync through your private iCloud account if you enable backup."
-        }
+        "acceptedAnswer": {"@type": "Answer", "text": "No. Your information stays on your devices and can sync through your private iCloud account if you enable backup."}
       },
       {
         "@type": "Question",
         "name": "Is Committed a subscription?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "No. Committed is free to use, with no time limit. Lifetime Unlock is an optional one-time purchase for premium features. See your local App Store for pricing."
-        }
+        "acceptedAnswer": {"@type": "Answer", "text": "No. Committed is free to use, with no time limit. Lifetime Unlock is an optional one-time purchase for premium features. See your local App Store for pricing."}
       },
       {
         "@type": "Question",
         "name": "Does Committed work on Apple Watch?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Yes. Lifetime Unlock includes an Apple Watch app and complications for supported watch faces."
-        }
+        "acceptedAnswer": {"@type": "Answer", "text": "Yes. Lifetime Unlock includes an Apple Watch app and complications for supported watch faces."}
       }
     ]
   }
@@ -108,21 +96,28 @@
   <main>
     <section class="intro calculator-intro shell">
       <p class="eyebrow">A free tool from Committed</p>
-      <h1>Sobriety date calculator</h1>
+      <div class="calculator-title-row">
+        <h1>Sobriety date calculator</h1>
+        <button class="info-button" type="button" popovertarget="calculator-info" aria-label="How the calculator works">i</button>
+      </div>
+      <div class="calculator-info-popover" id="calculator-info" popover>
+        <button class="info-close" type="button" popovertarget="calculator-info" popovertargetaction="hide" aria-label="Close">×</button>
+        <h2>How your sober time is calculated</h2>
+        <p>The day count is the number of calendar days between your start date and today. Your start date is day zero. The breakdown counts years, months, and days, accounting for different month lengths. Dates use your device’s local time zone; daylight-saving changes do not change the day count.</p>
+        <p>Your next milestone may be a set number of days or a calendar anniversary. A month is not always 30 days. You can enter any personal start date; the calculator does not choose a sobriety date for you.</p>
+      </div>
     </section>
 
     <section class="calculator-wrap shell" id="calculator" aria-labelledby="calculator-heading">
       <div class="calculator">
         <form class="calculator-form" data-sobriety-calculator>
           <h2 id="calculator-heading">Enter your start date</h2>
-
           <div class="field-grid">
             <div class="field">
               <label for="start-date">Start date</label>
               <input id="start-date" name="start-date" type="date" required autocomplete="off">
             </div>
           </div>
-
           <button class="calculate-button" type="submit">Calculate my time</button>
           <p class="form-error" data-error role="alert"></p>
           <p class="privacy-note"><span class="privacy-mark" aria-hidden="true"></span><span>Your date never leaves this page. The calculator does not store it.</span></p>
@@ -145,12 +140,6 @@
           </div>
         </div>
       </div>
-    </section>
-
-    <section class="calculator-method shell" aria-labelledby="method-heading">
-      <h2 id="method-heading">How your sober time is calculated</h2>
-      <p>The day count is the number of calendar days between your start date and today. Your start date is day zero. The breakdown counts years, months, and days, accounting for different month lengths. Dates use your device’s local time zone; daylight-saving changes do not change the day count.</p>
-      <p>Your next milestone may be a set number of days or a calendar anniversary. A month is not always 30 days. You can enter any personal start date; the calculator does not choose a sobriety date for you.</p>
     </section>
 
     <section class="content-section">
@@ -194,18 +183,9 @@
         </div>
         <div>
           <dl class="fact-list">
-            <div class="fact">
-              <dt>On your device</dt>
-              <dd>Your commitments, dates, milestones, and settings are stored locally.</dd>
-            </div>
-            <div class="fact">
-              <dt>In your iCloud</dt>
-              <dd>If you enable backup, the app uses your private iCloud account. The developer cannot view or retrieve it.</dd>
-            </div>
-            <div class="fact">
-              <dt>Collected by Committed</dt>
-              <dd>Nothing. There are no analytics, advertising identifiers, or developer servers.</dd>
-            </div>
+            <div class="fact"><dt>On your device</dt><dd>Your commitments, dates, milestones, and settings are stored locally.</dd></div>
+            <div class="fact"><dt>In your iCloud</dt><dd>If you enable backup, the app uses your private iCloud account. The developer cannot view or retrieve it.</dd></div>
+            <div class="fact"><dt>Collected by Committed</dt><dd>Nothing. There are no analytics, advertising identifiers, or developer servers.</dd></div>
           </dl>
         </div>
       </div>
@@ -219,22 +199,10 @@
         </div>
         <div>
           <dl class="fact-list">
-            <div class="fact">
-              <dt>What can I track?</dt>
-              <dd>Sobriety, nicotine, social media, or another personal commitment.</dd>
-            </div>
-            <div class="fact">
-              <dt>Do I need an account?</dt>
-              <dd>No. Your information stays on your devices and can sync through your private iCloud account if you enable backup.</dd>
-            </div>
-            <div class="fact">
-              <dt>Is it a subscription?</dt>
-              <dd>No. Committed is free to use, with no time limit. Lifetime Unlock is an optional one-time purchase for premium features. See your local App Store for pricing.</dd>
-            </div>
-            <div class="fact">
-              <dt>Does it work on Apple Watch?</dt>
-              <dd>Yes. Lifetime Unlock includes an Apple Watch app and complications for supported watch faces.</dd>
-            </div>
+            <div class="fact"><dt>What can I track?</dt><dd>Sobriety, nicotine, social media, or another personal commitment.</dd></div>
+            <div class="fact"><dt>Do I need an account?</dt><dd>No. Your information stays on your devices and can sync through your private iCloud account if you enable backup.</dd></div>
+            <div class="fact"><dt>Is it a subscription?</dt><dd>No. Committed is free to use, with no time limit. Lifetime Unlock is an optional one-time purchase for premium features. See your local App Store for pricing.</dd></div>
+            <div class="fact"><dt>Does it work on Apple Watch?</dt><dd>Yes. Lifetime Unlock includes an Apple Watch app and complications for supported watch faces.</dd></div>
           </dl>
         </div>
       </div>
