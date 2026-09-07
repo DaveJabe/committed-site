@@ -39,18 +39,6 @@
     "author": {"@type": "Person", "name": "David Jabech"}
   }
   </script>
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": [
-      {"@type": "Question", "name": "What can I track with Committed?", "acceptedAnswer": {"@type": "Answer", "text": "You can track sobriety, nicotine, social media, or another personal commitment."}},
-      {"@type": "Question", "name": "Does Committed require an account?", "acceptedAnswer": {"@type": "Answer", "text": "No. Your information stays on your devices and can sync through your private iCloud account if you enable backup."}},
-      {"@type": "Question", "name": "Is Committed a subscription?", "acceptedAnswer": {"@type": "Answer", "text": "No. Committed is free to use, with no time limit. Lifetime Unlock is an optional one-time purchase for premium features. See your local App Store for pricing."}},
-      {"@type": "Question", "name": "Does Committed work on Apple Watch?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. Lifetime Unlock includes an Apple Watch app and complications for supported watch faces."}}
-    ]
-  }
-  </script>
 </head>
 <body>
   <header class="site-header">
@@ -86,17 +74,15 @@
           <h2 id="calculator-heading">Enter your start date</h2>
           <div class="field-grid">
             <div class="field">
-              <label for="start-date">Start date</label>
+              <label class="visually-hidden" for="start-date">Start date</label>
               <input id="start-date" name="start-date" type="date" required autocomplete="off">
             </div>
           </div>
           <button class="calculate-button" type="submit">Calculate my time</button>
           <p class="form-error" data-error role="alert"></p>
-          <p class="privacy-note"><span class="privacy-mark" aria-hidden="true"></span><span>Your date never leaves this page. The calculator does not store it.</span></p>
         </form>
 
-        <div class="calculator-results" aria-live="polite" aria-atomic="true">
-          <p class="result-empty" data-result-empty>Choose a date to see your total days and next milestone.</p>
+        <div class="calculator-results" aria-live="polite" aria-atomic="true" hidden>
           <div class="result-content" data-result-content hidden>
             <p class="result-kicker">Time since your date</p>
             <span class="day-number" data-total-days>0</span>
@@ -107,31 +93,22 @@
               <p class="next-label" data-next-label></p>
               <p class="next-date" data-next-date></p>
             </div>
-            <p class="result-app-link"><a class="button-primary" href="https://apps.apple.com/app/apple-store/id6783140621?pt=122931649&amp;ct=committed-site-home&amp;mt=8">Track it on your phone</a></p>
-            <p class="purchase-note">Free to use. Optional premium features.</p>
           </div>
         </div>
       </div>
     </section>
 
     <section class="app-cta shell" aria-labelledby="app-cta-heading">
-      <div class="app-cta-copy">
-        <p class="eyebrow">Committed for iPhone and Apple Watch</p>
-        <h2 id="app-cta-heading">Want to keep track?</h2>
-        <p>Keep your progress, milestones, widgets, and Apple Watch complications in one private app.</p>
-      </div>
-      <div class="app-cta-actions">
-        <a class="button-primary" href="https://apps.apple.com/app/apple-store/id6783140621?pt=122931649&amp;ct=committed-site-home&amp;mt=8">View on the App Store</a>
-        <a class="quiet-link" href="/committed-site/sobriety-tracker-iphone/">Learn more</a>
-      </div>
+      <h2 id="app-cta-heading">Want to keep track?</h2>
+      <a class="button-primary" href="https://apps.apple.com/app/apple-store/id6783140621?pt=122931649&amp;ct=committed-site-home&amp;mt=8">View on the App Store</a>
     </section>
 
     <section class="accordion-shell shell" aria-label="More about Committed">
       <details class="info-accordion">
         <summary>What is Committed?</summary>
         <div class="accordion-content">
-          <p>Committed tracks the time since a date, your milestones, and more than one commitment. You can use it for sobriety, nicotine, social media, or another personal commitment.</p>
-          <p>There is no account, no social feed, no ads, and no analytics. Tracking is free with no time limit. Lifetime Unlock adds premium features with a one-time purchase.</p>
+          <p>Committed tracks time, milestones, and more than one personal commitment on iPhone.</p>
+          <p>No account, ads, analytics, or subscription are required. Lifetime Unlock adds optional premium features with a one-time purchase.</p>
           <p><a href="/committed-site/sobriety-tracker-iphone/">Learn more about the iPhone app</a></p>
         </div>
       </details>
@@ -139,26 +116,16 @@
       <details class="info-accordion">
         <summary>Apple Watch</summary>
         <div class="accordion-content">
-          <p>The Apple Watch app shows your commitments and milestones. Complications can keep your count on your watch face throughout the day.</p>
-          <p><a href="/committed-site/apple-watch-sobriety-counter/">See how Committed works on Apple Watch</a></p>
+          <p>The Apple Watch app shows your commitments and milestones, and complications can keep your count on your watch face.</p>
+          <p><a href="/committed-site/apple-watch-sobriety-counter/">Learn more about Apple Watch</a></p>
         </div>
       </details>
 
       <details class="info-accordion">
         <summary>Privacy</summary>
         <div class="accordion-content">
-          <p>Your commitments, dates, milestones, and settings are stored on your device. If you enable backup, Committed uses your private iCloud account.</p>
-          <p>Committed does not use analytics, advertising identifiers, or developer servers. The developer cannot view or retrieve your commitments.</p>
-        </div>
-      </details>
-
-      <details class="info-accordion">
-        <summary>Common questions</summary>
-        <div class="accordion-content faq-compact">
-          <p><strong>Do I need an account?</strong><br>No.</p>
-          <p><strong>Is it a subscription?</strong><br>No. Lifetime Unlock is an optional one-time purchase.</p>
-          <p><strong>Does it work on Apple Watch?</strong><br>Yes. The Apple Watch app and complications are included with Lifetime Unlock.</p>
-          <p><strong>What can I track?</strong><br>Sobriety, nicotine, social media, or another personal commitment.</p>
+          <p>This calculator runs in your browser and does not store or send the date you enter.</p>
+          <p>Committed stores your data on your device and, if enabled, in your private iCloud account. It does not use analytics, advertising identifiers, or developer servers.</p>
         </div>
       </details>
     </section>
