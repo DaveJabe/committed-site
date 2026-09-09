@@ -1,3 +1,11 @@
+@font-face {
+  font-family: "Geist";
+  src: url("./fonts/geist-variable.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+}
+
 :root {
   color-scheme: dark;
   --ink: #f5f4ef;
@@ -29,7 +37,7 @@ body {
     radial-gradient(circle at 12% 0%, rgba(168, 203, 197, 0.08), transparent 30rem),
     var(--bg);
   color: var(--ink);
-  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", sans-serif;
+  font-family: "Geist", -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", sans-serif;
   font-size: 16px;
   line-height: 1.55;
   text-rendering: optimizeLegibility;
@@ -793,8 +801,10 @@ h1 {
 
 .calculator-intro h1 {
   margin-bottom: 10px;
-  font-size: clamp(1.65rem, 3.5vw, 2.5rem);
-  line-height: 1.15;
+  font-size: clamp(1.6rem, 3vw, 2.2rem);
+  font-weight: 500;
+  letter-spacing: -0.025em;
+  line-height: 1.2;
 }
 
 .calculator-intro .intro-copy {
