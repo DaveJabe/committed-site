@@ -795,32 +795,7 @@ h1 {
 }
 
 .intro.calculator-intro {
-  position: relative;
-  isolation: isolate;
   padding: 26px 0 12px;
-}
-
-.intro.calculator-intro::before,
-.intro.calculator-intro::after {
-  position: absolute;
-  z-index: -1;
-  top: 50%;
-  right: 12px;
-  width: 160px;
-  height: 160px;
-  border: 1px solid rgba(168, 203, 197, 0.28);
-  border-radius: 50%;
-  transform: translateY(-50%);
-  pointer-events: none;
-  content: "";
-}
-
-.intro.calculator-intro::after {
-  right: 48px;
-  width: 88px;
-  height: 88px;
-  background: rgba(168, 203, 197, 0.06);
-  box-shadow: 0 0 0 17px var(--bg), 0 0 0 18px rgba(168, 203, 197, 0.16);
 }
 
 .calculator-intro .eyebrow {

@@ -51,7 +51,6 @@ body {
   display: flex;
   align-items: flex-end;
   gap: 12px;
-  padding-right: 170px;
 }
 
 .calculator-title-row h1 {
@@ -297,22 +296,8 @@ body {
     padding: 28px 0 14px;
   }
 
-  .intro.calculator-intro::before {
-    right: -26px;
-    width: 118px;
-    height: 118px;
-  }
-
-  .intro.calculator-intro::after {
-    right: 3px;
-    width: 60px;
-    height: 60px;
-    box-shadow: 0 0 0 13px var(--bg), 0 0 0 14px rgba(168, 203, 197, 0.16);
-  }
-
   .calculator-title-row {
     gap: 10px;
-    padding-right: 78px;
   }
 
   .calculator-intro h1 {
