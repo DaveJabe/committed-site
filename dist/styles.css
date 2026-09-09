@@ -184,8 +184,8 @@ h1 {
 
 .calculator h2 {
   margin-bottom: 12px;
-  font-size: clamp(1.125rem, 2vw, 1.25rem);
-  font-weight: 400;
+  font-size: clamp(1.375rem, 2vw, 1.5rem);
+  font-weight: 500;
   letter-spacing: -0.01em;
   line-height: 1.35;
 }
@@ -314,7 +314,7 @@ h1 {
   top: -88px;
   width: 320px;
   height: 320px;
-  border: 1px solid rgba(168, 203, 197, 0.17);
+  border: 1px solid rgba(168, 203, 197, 0.3);
   border-radius: 50%;
   content: "";
   pointer-events: none;
@@ -325,7 +325,7 @@ h1 {
   top: 7px;
   width: 130px;
   height: 130px;
-  background: rgba(168, 203, 197, 0.05);
+  background: rgba(168, 203, 197, 0.08);
 }
 
 .result-empty,
@@ -795,7 +795,32 @@ h1 {
 }
 
 .intro.calculator-intro {
+  position: relative;
+  isolation: isolate;
   padding: 26px 0 12px;
+}
+
+.intro.calculator-intro::before,
+.intro.calculator-intro::after {
+  position: absolute;
+  z-index: -1;
+  top: 50%;
+  right: 12px;
+  width: 160px;
+  height: 160px;
+  border: 1px solid rgba(168, 203, 197, 0.28);
+  border-radius: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  content: "";
+}
+
+.intro.calculator-intro::after {
+  right: 48px;
+  width: 88px;
+  height: 88px;
+  background: rgba(168, 203, 197, 0.06);
+  box-shadow: 0 0 0 17px var(--bg), 0 0 0 18px rgba(168, 203, 197, 0.16);
 }
 
 .calculator-intro .eyebrow {
@@ -804,9 +829,19 @@ h1 {
 
 .calculator-intro h1 {
   margin-bottom: 10px;
-  font-size: clamp(1.6rem, 3vw, 2.2rem);
-  font-weight: 550;
-  letter-spacing: -0.025em;
+  font-size: clamp(1.875rem, 4vw, 2.5rem);
+  font-weight: 600;
+  letter-spacing: -0.04em;
+  line-height: 1.1;
+}
+
+.calculator-title-detail {
+  display: block;
+  margin-top: 5px;
+  color: var(--muted);
+  font-size: 0.72em;
+  font-weight: 450;
+  letter-spacing: -0.02em;
   line-height: 1.2;
 }
 
