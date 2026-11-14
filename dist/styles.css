@@ -6,20 +6,23 @@
   font-display: swap;
 }
 
+/* Colors are the app's Mint palette (CommittedKit PaletteTokens.mint): bg, surface, surfaceHi, ink,
+   accent, and dawn (the warm milestone tone, here --accent-strong). */
 :root {
   color-scheme: dark;
-  --ink: #f5f4ef;
-  --muted: #aeb9b7;
-  --quiet: #7f8b8a;
-  --bg: #101617;
-  --panel: #172021;
-  --panel-strong: #1d292a;
-  --line: #344243;
-  --accent: #a8cbc5;
-  --accent-strong: #d8bd94;
-  --accent-ink: #0d1717;
+  --ink: #eceff0;
+  --muted: #a6adaf;
+  --quiet: #80888a;
+  --bg: #0e1315;
+  --panel: #181e21;
+  --panel-strong: #21282b;
+  --line: #2b3437;
+  --accent: #99d6c5;
+  --accent-hover: #b4e3d6;
+  --accent-strong: #edd2a4;
+  --accent-ink: #0e1315;
   --danger: #ffb7ad;
-  --shadow: 0 26px 80px rgba(0, 0, 0, 0.26);
+  --shadow: 0 26px 80px rgba(0, 0, 0, 0.32);
 }
 
 * {
@@ -34,7 +37,8 @@ body {
   margin: 0;
   min-width: 320px;
   background:
-    radial-gradient(circle at 12% 0%, rgba(168, 203, 197, 0.08), transparent 30rem),
+    radial-gradient(circle at 12% 0%, rgba(153, 214, 197, 0.08), transparent 30rem),
+    radial-gradient(circle at 88% 100%, rgba(237, 210, 164, 0.05), transparent 34rem),
     var(--bg);
   color: var(--ink);
   font-family: "Geist", -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", sans-serif;
@@ -69,7 +73,7 @@ button,
 
 .site-header {
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-  background: rgba(16, 22, 23, 0.9);
+  background: rgba(14, 19, 21, 0.88);
   backdrop-filter: blur(18px);
 }
 
@@ -227,7 +231,7 @@ h1 {
   padding: 0 14px;
   border: 1px solid var(--line);
   border-radius: 12px;
-  background: #11191a;
+  background: #12181b;
   color: var(--ink);
 }
 
@@ -270,7 +274,7 @@ h1 {
 
 .calculate-button:hover,
 .button-primary:hover {
-  background: #c0ddd8;
+  background: var(--accent-hover);
 }
 
 .privacy-note {
@@ -303,29 +307,8 @@ h1 {
   min-height: 430px;
   align-items: center;
   background:
-    radial-gradient(circle at 78% 26%, rgba(216, 189, 148, 0.13), transparent 18rem),
+    radial-gradient(circle at 78% 26%, rgba(237, 210, 164, 0.10), transparent 18rem),
     var(--panel-strong);
-}
-
-.calculator-results::before,
-.calculator-results::after {
-  position: absolute;
-  right: -70px;
-  top: -88px;
-  width: 320px;
-  height: 320px;
-  border: 1px solid rgba(168, 203, 197, 0.3);
-  border-radius: 50%;
-  content: "";
-  pointer-events: none;
-}
-
-.calculator-results::after {
-  right: 24px;
-  top: 7px;
-  width: 130px;
-  height: 130px;
-  background: rgba(168, 203, 197, 0.08);
 }
 
 .result-empty,

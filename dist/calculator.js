@@ -15,6 +15,8 @@
   const sinceValue = document.querySelector("[data-since]");
   const nextLabel = document.querySelector("[data-next-label]");
   const nextDate = document.querySelector("[data-next-date]");
+  const dotField = document.querySelector("[data-dot-field]");
+  const dotCanvas = document.querySelector("[data-dot-canvas]");
 
   const words = {
     en: {
@@ -150,14 +152,15 @@
     return new Intl.ListFormat(locale, { style: "long", type: "conjunction" }).format(items);
   }
 
-  function nextMilestone(start, now) {
-    const elapsed = now - start;
+  // The fixed milestones, before the yearly anniversaries take over. Shared by the "Next" line and the
+  // dot field, so the dots that glow are exactly the milestones the calculator counts.
+  function fixedMilestones(start) {
     const dayCandidate = (days, name) => {
       const date = new Date(start);
       date.setDate(date.getDate() + days);
       return { name, date };
     };
-    const candidates = [
+    return [
       dayCandidate(1, words.oneDay),
       dayCandidate(7, words.oneWeek),
       dayCandidate(30, words.thirtyDays),
@@ -169,7 +172,27 @@
       { name: words.twoYears, date: addYearsClamped(start, 2) },
       dayCandidate(500, words.fiveHundredDays),
       dayCandidate(1000, words.thousandDays)
-    ].filter((milestone) => milestone.date > now && milestone.date - start > elapsed);
+    ];
+  }
+
+  // Day numbers (start date = day 0) of every milestone already reached, anniversaries included.
+  function reachedMilestoneDays(start, now) {
+    const reached = new Set();
+    fixedMilestones(start)
+      .filter((milestone) => milestone.date <= now)
+      .forEach((milestone) => reached.add(calendarDays(start, milestone.date)));
+    for (let years = 1; ; years += 1) {
+      const anniversary = addYearsClamped(start, years);
+      if (anniversary > now) break;
+      reached.add(calendarDays(start, anniversary));
+    }
+    return reached;
+  }
+
+  function nextMilestone(start, now) {
+    const elapsed = now - start;
+    const candidates = fixedMilestones(start)
+      .filter((milestone) => milestone.date > now && milestone.date - start > elapsed);
 
     let anniversaryCount = Math.max(1, now.getFullYear() - start.getFullYear());
     let anniversaryDate = addYearsClamped(start, anniversaryCount);
@@ -183,6 +206,123 @@
     });
 
     return candidates.sort((a, b) => a.date - b.date)[0];
+  }
+
+  // ---- Dot field: the app's Matrix view, one dot per day, milestones in dawn, today ringed. ----
+
+  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+  let dotState = null;
+  let dotAnimation = 0;
+
+  // Largest dot spacing whose grid fits the width without growing taller than the height budget.
+  // The budget grows with the count, so a few weeks reads as a short row and decades still fit.
+  function dotLayout(count, width) {
+    const heightBudget = Math.min(320, Math.max(120, Math.sqrt(count) * 6));
+    for (let spacing = 22; spacing > 3; spacing -= 0.25) {
+      const columns = Math.max(1, Math.floor(width / spacing));
+      const rows = Math.ceil(count / columns);
+      if (rows * spacing <= heightBudget) return { spacing, columns, rows };
+    }
+    const columns = Math.max(1, Math.floor(width / 3));
+    return { spacing: 3, columns, rows: Math.ceil(count / columns) };
+  }
+
+  function drawDotField(animate) {
+    if (!dotState || !dotCanvas) return;
+    cancelAnimationFrame(dotAnimation);
+
+    const { count, milestones } = dotState;
+    const width = dotCanvas.clientWidth;
+    if (width <= 0) return;
+    const { spacing, columns, rows } = dotLayout(count, width);
+    const ratio = window.devicePixelRatio || 1;
+    const height = rows * spacing;
+
+    dotCanvas.style.height = `${height}px`;
+    dotCanvas.width = Math.round(width * ratio);
+    dotCanvas.height = Math.round(height * ratio);
+    dotState.width = width;
+
+    const context = dotCanvas.getContext("2d");
+    context.setTransform(ratio, 0, 0, ratio, 0, 0);
+    context.clearRect(0, 0, width, height);
+
+    const styles = getComputedStyle(document.documentElement);
+    const accent = styles.getPropertyValue("--accent").trim() || "#99d6c5";
+    const dawn = styles.getPropertyValue("--accent-strong").trim() || "#edd2a4";
+    const dayRadius = Math.max(0.7, spacing * 0.22);
+    const milestoneRadius = Math.max(1.1, spacing * 0.3);
+    const center = (index) => ({
+      x: (index % columns) * spacing + spacing / 2,
+      y: Math.floor(index / columns) * spacing + spacing / 2
+    });
+
+    // Draws dots [from, to) in two batched paths, one per color; today is drawn last on its own.
+    const drawRange = (from, to) => {
+      const last = count - 1;
+      context.beginPath();
+      for (let index = from; index < to; index += 1) {
+        if (index === last || milestones.has(index)) continue;
+        const { x, y } = center(index);
+        context.moveTo(x + dayRadius, y);
+        context.arc(x, y, dayRadius, 0, Math.PI * 2);
+      }
+      context.globalAlpha = 0.55;
+      context.fillStyle = accent;
+      context.fill();
+
+      context.beginPath();
+      for (let index = from; index < to; index += 1) {
+        if (index === last || !milestones.has(index)) continue;
+        const { x, y } = center(index);
+        context.moveTo(x + milestoneRadius, y);
+        context.arc(x, y, milestoneRadius, 0, Math.PI * 2);
+      }
+      context.globalAlpha = 1;
+      context.fillStyle = dawn;
+      context.fill();
+
+      if (to === count) {
+        const { x, y } = center(last);
+        context.beginPath();
+        context.arc(x, y, Math.max(1.4, spacing * 0.24), 0, Math.PI * 2);
+        context.fillStyle = accent;
+        context.fill();
+        context.beginPath();
+        context.arc(x, y, Math.max(4, spacing * 0.46), 0, Math.PI * 2);
+        context.lineWidth = Math.max(1, spacing * 0.07);
+        context.strokeStyle = "rgba(236, 239, 240, 0.55)";
+        context.stroke();
+      }
+    };
+
+    if (!animate || reducedMotion.matches) {
+      drawRange(0, count);
+      return;
+    }
+
+    // Entrance: the days fill in, in order, over a moment (deliberate UX timing, not control flow).
+    const duration = Math.min(1400, 500 + count * 0.6);
+    const startTime = performance.now();
+    let drawn = 0;
+    const step = (time) => {
+      const progress = Math.min(1, (time - startTime) / duration);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      const target = progress === 1 ? count : Math.floor(count * eased);
+      if (target > drawn) {
+        drawRange(drawn, target);
+        drawn = target;
+      }
+      if (drawn < count) dotAnimation = requestAnimationFrame(step);
+    };
+    dotAnimation = requestAnimationFrame(step);
+  }
+
+  // Re-lay out (without the entrance) when the canvas changes width: rotation, window resize.
+  if (dotCanvas && "ResizeObserver" in window) {
+    new ResizeObserver(() => {
+      if (dotState && dotCanvas.clientWidth > 0 && dotCanvas.clientWidth !== dotState.width) drawDotField(false);
+    }).observe(dotCanvas);
   }
 
   function render(start) {
@@ -213,6 +353,12 @@
 
     results.hidden = false;
     content.hidden = false;
+
+    if (dotField && dotCanvas) {
+      dotField.hidden = false;
+      dotState = { count: totalDays + 1, milestones: reachedMilestoneDays(start, now) };
+      drawDotField(true);
+    }
   }
 
   form.addEventListener("submit", (event) => {
