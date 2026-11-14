@@ -633,7 +633,7 @@ body {
   }
 
   .calculator-intro h1 {
-    font-size: 2rem;
+    font-size: 1.7rem;
   }
 
   .dot-field {
@@ -672,3 +672,97 @@ body {
     flex: 1 1 auto;
   }
 }
+
+/* Showcase as the page's opening section: bigger heading, no rule above it, and a shorter crop of the
+   screenshot so the calculator still starts near the top of the screen. */
+.hero-showcase {
+  grid-template-columns: minmax(0, 1fr) minmax(200px, 280px);
+  padding-top: clamp(36px, 5vw, 60px);
+  padding-bottom: clamp(32px, 4vw, 48px);
+  border-top: 0;
+}
+
+.hero-showcase h2,
+.calculator-intro h1 {
+  text-wrap: balance;
+}
+
+.hero-showcase h2 {
+  margin-bottom: 18px;
+  font-size: clamp(2.6rem, 5.6vw, 4.4rem);
+  font-weight: 700;
+}
+
+.hero-showcase .showcase-text {
+  font-size: clamp(1.05rem, 1.6vw, 1.2rem);
+}
+
+.hero-showcase .showcase-shot img {
+  aspect-ratio: 598 / 900;
+}
+
+.hero-showcase + .calculator-intro {
+  padding-top: clamp(30px, 4vw, 44px);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+@media (max-width: 820px) {
+  .hero-showcase {
+    grid-template-columns: minmax(0, 1fr) minmax(180px, 240px);
+    gap: 32px;
+  }
+
+  .hero-showcase .showcase-shot {
+    width: 100%;
+  }
+}
+
+@media (max-width: 600px) {
+  .hero-showcase {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-showcase .showcase-shot {
+    width: min(250px, 66%);
+  }
+}
+
+@media (max-width: 560px) {
+  .hero-showcase {
+    gap: 26px;
+    padding-top: 30px;
+    padding-bottom: 30px;
+  }
+
+  .hero-showcase .eyebrow {
+    margin-bottom: 10px;
+    font-size: 0.76rem;
+  }
+
+  .hero-showcase h2 {
+    margin-bottom: 14px;
+    font-size: 2.3rem;
+  }
+
+  .hero-showcase .button-row {
+    margin-top: 22px;
+    gap: 10px;
+  }
+
+  .hero-showcase .button-row .button-primary,
+  .hero-showcase .button-row .button-secondary {
+    min-height: 46px;
+    padding: 10px 12px;
+    font-size: 0.94rem;
+  }
+
+  .hero-showcase .showcase-shot {
+    width: min(220px, 62%);
+  }
+
+  .hero-showcase .showcase-shot img {
+    aspect-ratio: 598 / 800;
+    border-radius: 20px;
+  }
+}
+
