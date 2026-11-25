@@ -177,7 +177,7 @@ const press = {
       [
         ["App name", app.storeName],
         ["Developer", `${app.developer} (independent)`],
-        ["Current version", "3.1 on iPhone and Apple Watch (November 2026). Mac: 3.0, with 3.1 in review."],
+        ["Current version", "3.1 on iPhone, Mac and Apple Watch (November 2026)."],
         ["Platforms", `iPhone (iOS ${app.requirements.ios} or later), Mac (macOS ${app.requirements.macos} or later), Apple Watch (watchOS ${app.requirements.watchos} or later). One universal download.`],
         ["Languages", "English, Spanish"],
         ["Price", `Free to download and use. Lifetime Unlock: $${app.price} US, one-time in-app purchase, covering iPhone, Mac and Apple Watch. No subscription.`],
@@ -190,7 +190,7 @@ const press = {
       [
         ["Nombre", app.storeName],
         ["Desarrollador", `${app.developer} (independiente)`],
-        ["Versión actual", "3.1 en iPhone y Apple Watch (noviembre de 2026). Mac: 3.0, con la 3.1 en revisión."],
+        ["Versión actual", "3.1 en iPhone, Mac y Apple Watch (noviembre de 2026)."],
         ["Plataformas", `iPhone (iOS ${app.requirements.ios} o posterior), Mac (macOS ${app.requirements.macos} o posterior), Apple Watch (watchOS ${app.requirements.watchos} o posterior). Una sola descarga universal.`],
         ["Idiomas", "Español, inglés"],
         ["Precio", "Descarga y uso gratis. Desbloqueo de por vida: 14,99 USD en EE. UU. (varía por país), compra única dentro de la app para iPhone, Mac y Apple Watch. Sin suscripción."],

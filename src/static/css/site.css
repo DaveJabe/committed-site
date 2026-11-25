@@ -511,7 +511,7 @@ figcaption p { color: var(--ink-dim); font-size: 0.98rem; }
 .tool-output { padding: clamp(22px, 3vw, 40px); background: var(--surface-hi); min-width: 0; }
 @media (max-width: 900px) { .tool { grid-template-columns: 1fr; } .tool-controls { border-right: 0; border-bottom: 1px solid var(--hairline); } }
 
-.field { display: grid; gap: 8px; margin-bottom: 20px; }
+.field { display: grid; grid-template-columns: minmax(0, 1fr); gap: 8px; margin-bottom: 20px; min-width: 0; }
 .field > label, .field > .label, fieldset > legend { color: var(--ink-dim); font-size: 0.9rem; font-weight: 560; }
 fieldset { margin: 0 0 20px; padding: 0; border: 0; }
 fieldset > legend { margin-bottom: 8px; padding: 0; }
@@ -520,6 +520,15 @@ input[type="date"], input[type="text"], input[type="number"], select {
   border: 1px solid var(--hairline-strong); border-radius: var(--radius-s);
   background: var(--bg); color: var(--ink);
 }
+/* iOS Safari gives date inputs an intrinsic width from the native control, so on phones they ignored width: 100%
+   and ran past the container's trailing edge. Dropping the native appearance makes them size like the text fields. */
+input[type="date"] {
+  -webkit-appearance: none; appearance: none;
+  display: block; min-width: 0; max-width: 100%;
+  font: inherit; line-height: 48px; text-align: start;
+}
+input[type="date"]::-webkit-date-and-time-value { margin: 0; text-align: start; }
+input[type="date"]::-webkit-datetime-edit { padding: 0; }
 input[type="date"]::-webkit-calendar-picker-indicator { cursor: pointer; filter: invert(0.85); }
 @media (prefers-color-scheme: light) { .allows-light input[type="date"]::-webkit-calendar-picker-indicator { filter: none; } }
 input:focus-visible, select:focus-visible { outline: 2px solid var(--focus); outline-offset: 1px; }
@@ -559,10 +568,10 @@ input:focus-visible, select:focus-visible { outline: 2px solid var(--focus); out
 .calc-layout { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 0.75fr); gap: clamp(28px, 4vw, 56px); align-items: start; }
 @media (max-width: 960px) { .calc-layout { grid-template-columns: 1fr; } }
 .calculator { border: 1px solid var(--hairline); border-radius: var(--radius-l); background: var(--surface); overflow: hidden; }
-.calculator-form { display: grid; grid-template-columns: 1fr auto; gap: 12px; align-items: end; padding: clamp(20px, 3vw, 30px); border-bottom: 1px solid var(--hairline); }
+.calculator-form { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 12px; align-items: end; padding: clamp(20px, 3vw, 30px); border-bottom: 1px solid var(--hairline); }
 .calculator-form .field { margin: 0; }
 .calculator-form .button { min-height: 50px; }
-@media (max-width: 520px) { .calculator-form { grid-template-columns: 1fr; } }
+@media (max-width: 520px) { .calculator-form { grid-template-columns: minmax(0, 1fr); } }
 .calculator-results { padding: clamp(22px, 3vw, 34px); }
 .calculator-results[hidden] { display: none; }
 .calculator-empty { padding: clamp(22px, 3vw, 34px); color: var(--ink-faint); }
