@@ -1,5 +1,9 @@
 name: Deploy Committed to GitHub Pages
 
+# Builds src/ into dist/ and publishes it. The site's address comes from site.config.mjs; to serve a
+# custom domain from the root, set the repository variables SITE_ORIGIN, SITE_BASE_PATH and
+# SITE_CUSTOM_DOMAIN (Settings > Secrets and variables > Actions > Variables). See docs/DOMAIN-MIGRATION.md.
+
 on:
   push:
     branches:
@@ -21,9 +25,24 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
+    env:
+      SITE_ORIGIN: ${{ vars.SITE_ORIGIN }}
+      SITE_BASE_PATH: ${{ vars.SITE_BASE_PATH }}
+      SITE_CUSTOM_DOMAIN: ${{ vars.SITE_CUSTOM_DOMAIN }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Test date math
+        run: npm test
+
+      - name: Build site
+        run: npm run build
 
       - name: Configure Pages
         uses: actions/configure-pages@v5

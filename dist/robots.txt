@@ -1,4 +1,0 @@
-User-agent: *
-Allow: /
-
-Sitemap: https://davejabe.github.io/committed-site/sitemap.xml

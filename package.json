@@ -1,0 +1,11 @@
+{
+  "name": "committed-site",
+  "private": true,
+  "description": "The Committed website. A dependency-free static build: src/ → dist/.",
+  "engines": { "node": ">=20" },
+  "scripts": {
+    "build": "node build.mjs",
+    "test": "node scripts/test-all-zones.mjs",
+    "preview": "node scripts/serve.mjs"
+  }
+}
