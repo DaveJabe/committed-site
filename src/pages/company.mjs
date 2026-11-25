@@ -147,8 +147,8 @@ const press = {
   campaign: "press",
   updated: "2026-11-25",
   lightMode: true,
-  en: { path: "press/", title: "Press Kit | Committed Sobriety Tracker", description: "Press kit for Committed: app icon, screenshots of iPhone, Mac, Apple Watch and widgets, descriptions, pricing, platforms, release notes and contact.", crumb: "Press kit" },
-  es: { path: "es/prensa/", title: "Kit de prensa | Committed", description: "Kit de prensa de Committed: icono, capturas de iPhone, Mac, Apple Watch y widgets, descripciones, precio, plataformas, novedades y contacto.", crumb: "Kit de prensa" },
+  en: { path: "press/", title: "Press Kit | Committed Sobriety Tracker", description: "Press kit for Committed: app icon, images of iPhone, Mac, Apple Watch and widgets, descriptions, pricing, platforms, release notes and contact.", crumb: "Press kit" },
+  es: { path: "es/prensa/", title: "Kit de prensa | Committed", description: "Kit de prensa de Committed: icono, imágenes de iPhone, Mac, Apple Watch y widgets, descripciones, precio, plataformas, novedades y contacto.", crumb: "Kit de prensa" },
   scripts: ["js/press.js"],
   render(ctx) {
     const T = (en, es) => t(ctx, { en, es });
@@ -208,7 +208,7 @@ const press = {
       { file: `assets/committed-widgets${ctx.lang === "es" ? "-es" : ""}.webp`, label: T("iPhone Home Screen widgets", "Widgets en la pantalla de inicio del iPhone") },
       { file: "assets/committed-watch-960.webp", full: "assets/committed-watch-1440.webp", label: T("Apple Watch complication", "Complicación de Apple Watch") }
     ];
-    const kit = ["press/committed-press-kit.zip", `press/committed-press-kit-${ctx.lang}.zip`].find((path) => ctx.hasAsset(path));
+    const kit = [ctx.lang === "es" ? "press/committed-press-kit-es.zip" : null, "press/committed-press-kit.zip"].filter(Boolean).find((path) => ctx.hasAsset(path));
     return `<section class="prose" style="padding-bottom:24px"><div class="shell">
   <p class="eyebrow"><b>${T("Press", "Prensa")}</b></p>
   <h1>${T("Committed press kit", "Kit de prensa de Committed")}</h1>
@@ -237,7 +237,7 @@ const press = {
 </div></section>
 
 <section class="section"><div class="shell">
-  <div class="section-head"><h2 class="title-s">${T("Images", "Imágenes")}</h2><p class="muted">${T("Genuine screenshots with sample commitments. Higher-resolution files, Mac screenshots and promotional artwork are in the press kit download.", "Capturas reales con compromisos de ejemplo. Los archivos en mayor resolución, las capturas de Mac y las imágenes promocionales están en la descarga del kit.")}</p></div>
+  <div class="section-head"><h2 class="title-s">${T("Images", "Imágenes")}</h2><p class="muted">${T("Genuine screenshots with sample commitments. The press kit download adds higher-resolution files and promotional renditions drawn from the app’s own designs with sample data.", "Capturas reales con compromisos de ejemplo. La descarga del kit añade archivos en mayor resolución e imágenes promocionales creadas a partir de los diseños de la app con datos de ejemplo.")}</p></div>
   <div class="download-grid">
     ${images.map((image) => `<figure><div class="thumb stage"><img src="${ctx.asset(image.file)}" alt="${esc(image.label)}" loading="lazy" decoding="async"></div><figcaption><span>${esc(image.label)}</span><a href="${ctx.asset(image.full || image.file)}" download>${T("Download", "Descargar")}</a></figcaption></figure>`).join("")}
   </div>
