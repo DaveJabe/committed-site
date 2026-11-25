@@ -1,0 +1,23 @@
+name: Check
+
+# Runs on pull requests: the date tests in several time zones, and a build that fails on any broken
+# internal link or missing asset. It never deploys.
+
+on:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: npm test
+      - run: npm run build
+      - name: Build for a custom domain at the root
+        run: SITE_ORIGIN=https://example.com SITE_BASE_PATH=/ SITE_CUSTOM_DOMAIN=example.com npm run build
