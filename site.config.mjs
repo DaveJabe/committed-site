@@ -39,7 +39,7 @@ export default {
     price: "14.99",
     priceCurrency: "USD",
     version: "3.1",
-    macVersion: "3.0",
+    macVersion: "3.1",
     requirements: { ios: "18.6", macos: "15.2", watchos: "11.0" },
     developer: "David Jabech",
     supportEmail: "david.jabech@gmail.com"
