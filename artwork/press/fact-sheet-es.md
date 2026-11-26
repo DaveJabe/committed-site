@@ -32,7 +32,7 @@ Es privado por diseño: sin anuncios, sin analíticas, sin rastreo y sin cuenta.
 | Privacidad | Sin anuncios, analíticas, SDK de rastreo ni cuentas. Los datos se quedan en el dispositivo; la sincronización opcional usa el iCloud de la propia persona. |
 | Accesibilidad | Etiquetas de VoiceOver (también en los widgets), Dynamic Type, alternativas con Reducir movimiento en todos los estilos, paletas para Aumentar contraste |
 | App Store | https://apps.apple.com/app/id6783140621 |
-| Sitio web | https://davejabe.github.io/committed-site/es/ |
+| Sitio web | https://committedtracker.app/es/ |
 | Contacto de prensa | el correo de la página de Soporte del sitio |
 
 ## Versiones recientes

@@ -1,97 +1,113 @@
-# Moving the site to a custom domain
+# Moving the site to committedtracker.app
 
-The site is ready to move from `https://davejabe.github.io/committed-site/` to a domain served from its root.
-Nothing here has been done: no domain is registered and nothing has been deployed. Do these steps once the
-domain is bought and confirmed. `example.com` below stands for the real domain.
+The site moves from `https://davejabe.github.io/committed-site/` to `https://committedtracker.app/`. The build
+side is done in this repository (`site.config.mjs` defaults to the new origin and root path, and the build writes
+a `CNAME` file). Every path stays the same: only the host changes and the `/committed-site` prefix goes away.
 
-## Before you start: check what the current URLs earn
+**Do the steps in this order.** Merging the pull request publishes pages whose links start at the domain root, so
+it must not reach `main` until GitHub is serving the custom domain (step 4). Before then the live site keeps working
+at the old address.
 
-Search Console (property `https://davejabe.github.io/committed-site/`, verified by the meta tag on the
-English calculator) shows which pages get impressions. Note the calculator's clicks, impressions and
-average position for "sobriety calculator" and "calculadora de sobriedad" for the last 3 months, so the
-move can be judged afterwards. Every path stays the same after the move, so only the host and the
-`/committed-site` prefix change.
+`.app` domains are on the browsers' HTTPS-only list, so `committedtracker.app` opens only once GitHub has issued its
+certificate. That takes minutes to an hour after step 4. During that window the old address redirects to a domain
+that browsers won't open yet, so do step 4 at a quiet time and have steps 5 and 6 ready.
 
-## 1. DNS at Cloudflare
+## Before you start: note what the current URLs earn
 
-Decide between the apex (`example.com`) and `www.example.com` as the canonical host. Apex is shorter;
-both work with GitHub Pages.
+In Search Console (property `https://davejabe.github.io/committed-site/`), note the calculator's clicks, impressions
+and average position for "sobriety calculator" and "calculadora de sobriedad" over the last 3 months, so the move
+can be judged afterwards.
 
-- Apex: four `A` records to `185.199.108.153`, `185.199.109.153`, `185.199.110.153`, `185.199.111.153`
-  (and optionally `AAAA` to `2606:50c0:8000::153`, `2606:50c0:8001::153`, `2606:50c0:8002::153`, `2606:50c0:8003::153`).
-- `www`: a `CNAME` to `davejabe.github.io`.
-- Set these records to **DNS only** (grey cloud) at first, so GitHub can issue its certificate. Proxying can
-  be turned on later with SSL mode **Full (strict)** if you want Cloudflare's cache.
-- Check GitHub's current IP list before entering them: https://docs.github.com/pages/configuring-a-custom-domain-for-your-github-pages-site/managing-a-custom-domain-for-your-github-pages-site
+## 1. Verify the domain with GitHub (any time)
 
-## 2. Verify the domain with GitHub
+GitHub > your profile picture > Settings > Pages > **Add a domain** > `committedtracker.app`. GitHub shows a `TXT`
+record (host `_github-pages-challenge-DaveJabe`). Add it at your registrar, then press **Verify**. This stops anyone
+else's repository from claiming the domain.
 
-GitHub > Settings (your account) > Pages > Add a domain. Add the `TXT` record it gives you at Cloudflare.
-Verification stops anyone else's repository from claiming the domain.
+## 2. Add the DNS records (any time, at your registrar)
 
-## 3. Point the build at the new address
+| Type | Host / name | Value |
+|---|---|---|
+| `A` | `@` (apex) | `185.199.108.153` |
+| `A` | `@` | `185.199.109.153` |
+| `A` | `@` | `185.199.110.153` |
+| `A` | `@` | `185.199.111.153` |
+| `AAAA` | `@` | `2606:50c0:8000::153` |
+| `AAAA` | `@` | `2606:50c0:8001::153` |
+| `AAAA` | `@` | `2606:50c0:8002::153` |
+| `AAAA` | `@` | `2606:50c0:8003::153` |
+| `CNAME` | `www` | `davejabe.github.io` |
 
-In `DaveJabe/committed-site` > Settings > Secrets and variables > Actions > **Variables**, add:
+Remove any parking or forwarding records the registrar added for `@` or `www` (often an `A`, `ALIAS` or "URL
+redirect"). If the DNS is on Cloudflare, set these records to **DNS only** (grey cloud). GitHub's current list is at
+https://docs.github.com/pages/configuring-a-custom-domain-for-your-github-pages-site/managing-a-custom-domain-for-your-github-pages-site
 
-| Name | Value |
-|---|---|
-| `SITE_ORIGIN` | `https://example.com` |
-| `SITE_BASE_PATH` | `/` |
-| `SITE_CUSTOM_DOMAIN` | `example.com` |
+Wait until the records resolve, for example `dig committedtracker.app +short` lists the four `185.199.…` addresses and
+`dig www.committedtracker.app +short` shows `davejabe.github.io`. Usually minutes, at most a day or two.
 
-(Or change the defaults in `site.config.mjs`.) The build then writes canonical URLs, hreflang, Open Graph
-URLs, the sitemap, `robots.txt`, every internal link and asset path, and a `CNAME` file for the new host.
-Preview it locally first:
+## 3. Check the repository variables
 
-```sh
-SITE_ORIGIN=https://example.com SITE_BASE_PATH=/ SITE_CUSTOM_DOMAIN=example.com npm run build
-SITE_BASE_PATH=/ npm run preview   # then open http://localhost:4321/
-```
+`DaveJabe/committed-site` > Settings > Secrets and variables > Actions > **Variables** should have no `SITE_ORIGIN`,
+`SITE_BASE_PATH` or `SITE_CUSTOM_DOMAIN` (the deploy logs show them empty today). The defaults in `site.config.mjs`
+are the new domain.
 
-## 4. GitHub Pages settings
+## 4. Set the custom domain on the repository
 
-Repository > Settings > Pages > Custom domain: enter `example.com` and save. Wait for the DNS check to pass,
-then tick **Enforce HTTPS** once the certificate is issued (can take up to an hour).
+`DaveJabe/committed-site` > Settings > Pages > Custom domain: `committedtracker.app` > **Save**. From this moment
+GitHub redirects the old address to the new one, and it starts issuing the certificate (for the apex and `www`;
+`www` will redirect to the apex).
 
-Run the deploy workflow (Actions > Deploy Committed to GitHub Pages > Run workflow) or merge to `main`.
+## 5. Merge the pull request right away
 
-## 5. Redirects from the old address
+Merging deploys the build for the new domain (canonical URLs, hreflang, Open Graph URLs, sitemap, `robots.txt`,
+links). Wait for "Deploy Committed to GitHub Pages" to go green in Actions.
 
-GitHub Pages redirects `https://davejabe.github.io/committed-site/…` to the custom domain automatically
-(301) once the custom domain is set on this repository, keeping the path. Check a few:
+## 6. Turn on HTTPS
 
-- `https://davejabe.github.io/committed-site/` → `https://example.com/`
-- `https://davejabe.github.io/committed-site/es/app-sobriedad-iphone/` → `https://example.com/es/app-sobriedad-iphone/`
-- `https://davejabe.github.io/committed-site/privacy.html` → `https://example.com/privacy.html`
+Back in Settings > Pages, once it says the DNS check succeeded and the certificate is ready, tick **Enforce HTTPS**.
+Then check:
 
-If the user site `davejabe.github.io` itself ever gets its own custom domain, project redirects change, so
-re-check then.
+- `https://committedtracker.app/` and `https://committedtracker.app/es/` load
+- `https://www.committedtracker.app/` redirects to `https://committedtracker.app/`
+- `https://davejabe.github.io/committed-site/es/app-sobriedad-iphone/` redirects to `https://committedtracker.app/es/app-sobriedad-iphone/`
+- `https://davejabe.github.io/committed-site/privacy.html` redirects to `https://committedtracker.app/privacy.html`
 
-## 6. Search Console
+If the user site `davejabe.github.io` ever gets its own custom domain, project redirects change, so re-check then.
 
-1. Add a **Domain** property for `example.com` (verified by a DNS `TXT` record at Cloudflare). It covers
+## 7. Search Console (same day)
+
+1. Add a **Domain** property for `committedtracker.app`, verified by the DNS `TXT` record it gives you. It covers
    http/https and www/apex.
-2. Submit `https://example.com/sitemap.xml`.
-3. In the old URL-prefix property use **Settings > Change of address** to point at the new property.
-4. Keep the old property and its verification tag for at least 180 days to watch the move.
-5. `robots.txt` now sits at the host root, so it is read for the first time; it allows everything.
+2. Submit `https://committedtracker.app/sitemap.xml`.
+3. In the old URL-prefix property use **Settings > Change of address** and choose the new property. Do this soon,
+   while the old property is still verified (its meta tag now sits behind the redirect).
+4. Keep the old property for at least 180 days to watch the move.
+5. `robots.txt` is now at the host root, so crawlers read it for the first time. It allows everything.
 
 Bing Webmaster Tools: import from Search Console and use its site move tool.
 
-## 7. App Store Connect
+## 8. App Store Connect
 
-App Store Connect > Apps > Committed > App Information and the version page:
+App Store Connect > Apps > Committed > App Information, and the version page:
 
-- **Marketing URL**: `https://example.com/sobriety-tracker-app/` (or `/es/app-sobriedad/` for the Spanish localization)
-- **Support URL**: `https://example.com/support.html` (`/es/soporte.html` for Spanish)
-- **Privacy Policy URL**: `https://example.com/privacy.html` (`/es/privacidad.html` for Spanish)
+| Field | English | Spanish localization |
+|---|---|---|
+| Privacy Policy URL | `https://committedtracker.app/privacy.html` | `https://committedtracker.app/es/privacidad.html` |
+| Support URL | `https://committedtracker.app/support.html` | `https://committedtracker.app/es/soporte.html` |
+| Marketing URL | `https://committedtracker.app/sobriety-tracker-app/` | `https://committedtracker.app/es/app-sobriedad/` |
 
-The privacy and support URLs can change without a new build. The Marketing URL is per version, so update it
-with the next submission. Also update any link to the site inside the app (Settings, Resources) in the next
-build; the old links keep working through the redirect meanwhile.
+The privacy and support URLs can change without a new build. The Marketing URL is per version, so update it with
+the next submission. The app itself has no links to the website, so no build is needed for the move.
 
-## 8. After the move
+## 9. Other places with the old address
+
+- In this repository, the press fact sheets and both press kit ZIPs already use the new address.
+- In `DaveJabe/Committed`, `marketing/search-console-and-measurement.md` and `marketing/seo-strategy.md` still
+  describe the old address. Update them when you next edit those notes.
+- Links you control outside GitHub: the App Store description if it names the site, social profiles, email
+  signature, and any outreach drafts.
+
+## 10. After the move
 
 - Request indexing of the calculator and the product page in the new property.
-- Update links you control: App Store description, press kit, social profiles, email signature.
 - Compare calculator clicks and position after 4 to 8 weeks with the numbers from "Before you start".

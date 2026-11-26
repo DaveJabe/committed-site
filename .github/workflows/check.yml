@@ -19,5 +19,5 @@ jobs:
           node-version: 22
       - run: npm test
       - run: npm run build
-      - name: Build for a custom domain at the root
-        run: SITE_ORIGIN=https://example.com SITE_BASE_PATH=/ SITE_CUSTOM_DOMAIN=example.com npm run build
+      - name: Build under a project path (keeps base-path support working)
+        run: SITE_ORIGIN=https://davejabe.github.io SITE_BASE_PATH=/committed-site/ SITE_CUSTOM_DOMAIN=none npm run build
