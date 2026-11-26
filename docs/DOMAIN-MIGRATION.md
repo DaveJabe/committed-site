@@ -79,9 +79,12 @@ If the user site `davejabe.github.io` ever gets its own custom domain, project r
 1. Add a **Domain** property for `committedtracker.app`, verified by the DNS `TXT` record it gives you. It covers
    http/https and www/apex.
 2. Submit `https://committedtracker.app/sitemap.xml`.
-3. In the old URL-prefix property use **Settings > Change of address** and choose the new property. Do this soon,
-   while the old property is still verified (its meta tag now sits behind the redirect).
-4. Keep the old property for at least 180 days to watch the move.
+3. Don't use **Change of address**. Google allows it only for domain-level properties, not a path such as
+   `davejabe.github.io/committed-site/`, and it expects 301 redirects, while GitHub's project redirects are 302s
+   (https://support.google.com/webmasters/answer/9370220). The move rests on the page-by-page redirects, the
+   canonical and hreflang tags, and the new sitemap.
+4. Keep the old property, and keep the custom domain set on this repository (which is what produces the redirects),
+   for at least 180 days to watch the move.
 5. `robots.txt` is now at the host root, so crawlers read it for the first time. It allows everything.
 
 Bing Webmaster Tools: import from Search Console and use its site move tool.
