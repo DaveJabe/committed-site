@@ -70,8 +70,13 @@ node artwork/scripts/sync-from-app.mjs ../Committed   # palettes.json and the sh
   <folder>` captures every Screenshot Studio frame at 1320 × 2868, English and Spanish. Copy the `en/`
   and `es/` folders to `artwork/captures/studio/`; the press kit then uses them instead of the website's
   598 × 1300 frames.
-- **Mac**: the Mac Screenshot Studio (Debug menu) frames, captured at 2880 × 1800, go in
-  `artwork/captures/mac/en/` and `artwork/captures/mac/es/`.
+- **Mac**: the Mac Screenshot Studio (Debug menu) frames, captured at 2880 × 1800 and named
+  `Mac_<N>_<Name>_<en|es>.png`, are imported with
+  `node artwork/scripts/import-mac-captures.mjs <folder>` into `artwork/captures/mac/{en,es}/NN-name.png`
+  (flattened: App Store screenshots may not carry alpha). The 3.1 set is committed. The press kit carries
+  them whole plus the bare app window cut from frames 01, 02, 05 and 06, and the website's Mac page hero is
+  the window from 01-matrix (`lib/captures.mjs` holds the window's rectangle and fails the run if a new
+  Studio layout moves it).
 
 ## Specs
 

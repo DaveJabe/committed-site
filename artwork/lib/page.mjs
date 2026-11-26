@@ -9,7 +9,7 @@ export const ROOT = new URL('../..', import.meta.url).pathname; // the committed
 const font = (path) => `data:font/woff2;base64,${readFileSync(join(ROOT, path)).toString('base64')}`;
 
 const FONTS = `
-@font-face { font-family: 'Geist'; src: url(${font('dist/fonts/geist-variable.woff2')}) format('woff2'); font-weight: 100 900; }
+@font-face { font-family: 'Geist'; src: url(${font('src/static/fonts/geist-variable.woff2')}) format('woff2'); font-weight: 100 900; }
 @font-face { font-family: 'Inter'; src: url(${font('artwork/fonts/inter-light.woff2')}) format('woff2'); font-weight: 300; }
 @font-face { font-family: 'Inter'; src: url(${font('artwork/fonts/inter-regular.woff2')}) format('woff2'); font-weight: 400 500; }
 @font-face { font-family: 'Inter'; src: url(${font('artwork/fonts/inter-semibold.woff2')}) format('woff2'); font-weight: 600 700; }
