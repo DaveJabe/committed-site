@@ -161,7 +161,7 @@ const mac = {
       <div class="button-row">${storeButton(ctx, "mac", { mac: true, label: T("Download on the Mac App Store", "Descargar en el Mac App Store") })}</div>
       <ul class="hero-meta"><li>macOS ${req(ctx).macos}+</li><li>${T("Same download as iPhone", "La misma descarga que en iPhone")}</li><li>${T("One unlock for every device", "Un desbloqueo para todos tus dispositivos")}</li></ul>
     </div>
-    ${artworkOr(ctx, "assets/mac/committed-mac-hero.webp", T("Committed widgets on a Mac desktop, with sample commitments", "Widgets de Committed en el escritorio de un Mac, con compromisos de ejemplo"), desktop, { eager: true, className: "mac-window", width: 2400, height: 1500 })}
+    ${artworkOr(ctx, "assets/mac/committed-mac-hero.webp", T("The Committed Mac app showing Matrix: 4 years, 4 days sober from alcohol, with sample commitments in the sidebar", "La app Committed para Mac mostrando Matriz: 4 años y 4 días sin alcohol, con compromisos de ejemplo en la barra lateral"), desktop, { eager: true, className: "mac-window", width: 1600, height: 1031 })}
   </div>
 </section>
 

@@ -43,7 +43,7 @@ const only = value('--only');
 const verify = flag('--verify');
 
 const dataURL = (path, type) => `data:${type};base64,${readFileSync(join(ROOT, path)).toString('base64')}`;
-const ASSETS = { icon: dataURL('dist/icon-1024.png', 'image/png') };
+const ASSETS = { icon: dataURL('src/static/icon-1024.png', 'image/png') };
 
 function build(job) {
   const spec = SPECS[job.spec];

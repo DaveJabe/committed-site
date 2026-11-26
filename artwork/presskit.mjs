@@ -7,14 +7,16 @@
 // Screenshots are never redrawn here. They are copied from genuine captures only:
 //   artwork/captures/studio/{en,es}/NN.png   full-size Screenshot Studio frames (Committed repo:
 //                                            scripts/capture-studio-frames.sh), preferred when present
-//   dist/assets/committed-*.webp             the website's current App Store frames (598 × 1300), used
+//   src/static/assets/committed-*.webp       the website's current App Store frames (598 × 1300), used
 //                                            until full-size captures are added
-//   artwork/captures/mac/{en,es}/*.png       native macOS screenshots, when Dave adds them
+//   artwork/captures/mac/{en,es}/NN-*.png    the Mac Screenshot Studio frames (2880 × 1800), whole, plus
+//                                            the bare app window cut from the frames that allow it
 
 import { cpSync, existsSync, mkdirSync, readdirSync, rmSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { execFileSync } from 'node:child_process';
 import { ROOT } from './lib/page.mjs';
+import { WINDOW_FRAMES, macCaptureDir, macCaptures, windowCropArgs } from './lib/captures.mjs';
 
 const OUT = join(ROOT, 'artwork/out');
 const run = (cmd, args) => execFileSync(cmd, args, { stdio: 'pipe' });
@@ -58,14 +60,20 @@ for (const L of ['en', 'es']) {
       for (const f of list(studio)) cpSync(join(studio, f), join(KIT, `screenshots/iphone/${locale}/committed-iphone-${f}`));
     } else {
       for (const name of ['matrix', 'sky', 'widgets']) {
-        const src = join(ROOT, `dist/assets/committed-${name}${locale === 'es' ? '-es' : ''}.webp`);
+        const src = join(ROOT, `src/static/assets/committed-${name}${locale === 'es' ? '-es' : ''}.webp`);
         run('convert', [src, '-strip', join(KIT, `screenshots/iphone/${locale}/committed-iphone-${name}.png`)]);
       }
     }
   }
-  run('convert', [join(ROOT, 'dist/assets/committed-watch-1440.webp'), '-strip', join(KIT, 'screenshots/apple-watch/committed-apple-watch-photo.jpg')]);
-  const macCaptures = [L].flatMap((l) => list(join(ROOT, 'artwork/captures/mac', l)).map((f) => [l, f]));
-  for (const [l, f] of macCaptures) cpSync(join(ROOT, 'artwork/captures/mac', l, f), join(KIT, `screenshots/mac/${l}-${f}`));
+  run('convert', [join(ROOT, 'src/static/assets/committed-watch-1440.webp'), '-strip', join(KIT, 'screenshots/apple-watch/committed-apple-watch-photo.jpg')]);
+  // Mac: the App Store frames as they are, and the window alone (no headline) where it can be cut out.
+  const mac = macCaptures(L);
+  if (mac.length) mkdirSync(join(KIT, 'screenshots/mac/window'), { recursive: true });
+  for (const f of mac) {
+    const src = join(macCaptureDir(L), f);
+    cpSync(src, join(KIT, `screenshots/mac/committed-mac-${f}`));
+    if (WINDOW_FRAMES.includes(f.replace(/\.png$/, ''))) run('convert', [...windowCropArgs(src, { transparent: true }), '-strip', join(KIT, `screenshots/mac/window/committed-mac-window-${f}`)]);
+  }
 
   // Artwork: the text-free key art plus the cross-platform and widget compositions.
   const art = [
@@ -91,12 +99,13 @@ for (const L of ['en', 'es']) {
 
   fact-sheet/    Descriptions, facts, pricing, platforms, recent releases (English and Spanish)
   icons/         App icon: square master (Apple applies the mask), pre-masked with transparency, Mac and Apple Watch
-  screenshots/   Genuine captures of the app. iPhone: ${iphoneSource}. Apple Watch: a photo of the watch face complication.${macCaptures.length ? ' Mac: native macOS captures.' : ''}
+  screenshots/   Genuine captures of the app. iPhone: ${iphoneSource}. Apple Watch: a photo of the watch face complication.${mac.length ? ' Mac: the App Store frames (2880 × 1800), and in mac/window/ the app window alone, on transparency.' : ''}
   artwork/       Key art and compositions drawn from the app's own designs (widgets, Matrix, Your Sky). "editorial" pieces carry no text.
 
   Everything shows synthetic demonstration data, never a real person's information.
   Todo muestra datos de demostración ficticios, nunca información de una persona real.
 
+  Website: https://committedtracker.app
   App Store: https://apps.apple.com/app/id6783140621
   `.replace(/^  /gm, '')
   );
