@@ -1,7 +1,7 @@
 # Committed website
 
 The marketing site, free tools and legal pages for Committed, served by GitHub Pages at
-https://davejabe.github.io/committed-site/.
+https://committedtracker.app/ (the old https://davejabe.github.io/committed-site/ addresses redirect there).
 
 ## Build and preview
 
@@ -10,11 +10,11 @@ Needs Node 20 or later. There are no dependencies to install.
 ```sh
 npm test          # date math tests in 13 time zones
 npm run build     # writes dist/ and fails on any broken internal link or missing asset
-npm run preview   # serves dist/ at http://localhost:4321/committed-site/
+npm run preview   # serves dist/ at http://localhost:4321/
 ```
 
 `dist/` is generated and not committed. The deploy workflow builds it on every push to `main`; the Check workflow
-builds it (for the current path and for a custom-domain root) on pull requests and never deploys.
+builds it (at the domain root and under a project path) on pull requests and never deploys.
 
 ## Configuration
 
@@ -22,11 +22,11 @@ builds it (for the current path and for a custom-domain root) on pull requests a
 
 | Variable | Default | Meaning |
 |---|---|---|
-| `SITE_ORIGIN` | `https://davejabe.github.io` | Scheme and host for canonical and Open Graph URLs |
-| `SITE_BASE_PATH` | `/committed-site/` | Path the site is served under |
-| `SITE_CUSTOM_DOMAIN` | empty | When set, the build writes a `CNAME` file |
+| `SITE_ORIGIN` | `https://committedtracker.app` | Scheme and host for canonical and Open Graph URLs |
+| `SITE_BASE_PATH` | `/` | Path the site is served under |
+| `SITE_CUSTOM_DOMAIN` | `committedtracker.app` | Written to the `CNAME` file; `none` leaves it out |
 
-In GitHub Actions they come from repository **Variables** of the same names. Moving to a domain is described in
+In GitHub Actions they come from repository **Variables** of the same names. The move to the domain is described in
 [docs/DOMAIN-MIGRATION.md](docs/DOMAIN-MIGRATION.md). The audit behind this rebuild is [docs/AUDIT.md](docs/AUDIT.md).
 
 ## Where things live

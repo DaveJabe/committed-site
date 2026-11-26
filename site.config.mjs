@@ -2,11 +2,11 @@
 // sitemap entry, robots.txt line and internal link is built from these values, so moving to a custom
 // domain is a change here (or two environment variables in the deploy workflow), not a find-and-replace.
 //
-// Today:        origin https://davejabe.github.io, basePath /committed-site/
-// Custom domain: origin https://example.com, basePath /, customDomain example.com (writes the CNAME file)
+// Live:     origin https://committedtracker.app, basePath /, customDomain committedtracker.app (writes CNAME)
+// Before:   origin https://davejabe.github.io, basePath /committed-site/ (GitHub redirects these URLs)
 //
-// Environment variables override the file, so a preview build can point anywhere:
-//   SITE_ORIGIN=https://example.com SITE_BASE_PATH=/ SITE_CUSTOM_DOMAIN=example.com npm run build
+// Environment variables override the file, so a preview build can point anywhere, e.g. the old path:
+//   SITE_ORIGIN=https://davejabe.github.io SITE_BASE_PATH=/committed-site/ SITE_CUSTOM_DOMAIN=none npm run build
 
 const env = (name) => (process.env[name] && process.env[name].trim()) || undefined;
 
@@ -17,9 +17,11 @@ function normalizeBasePath(value) {
   return path;
 }
 
-const origin = (env("SITE_ORIGIN") || "https://davejabe.github.io").replace(/\/+$/, "");
-const basePath = normalizeBasePath(env("SITE_BASE_PATH") || "/committed-site/");
-const customDomain = env("SITE_CUSTOM_DOMAIN") || null;
+const origin = (env("SITE_ORIGIN") || "https://committedtracker.app").replace(/\/+$/, "");
+const basePath = normalizeBasePath(env("SITE_BASE_PATH") || "/");
+// An empty SITE_CUSTOM_DOMAIN (as GitHub passes an unset variable) keeps the default; set it to "none" to omit CNAME.
+const customDomainSetting = env("SITE_CUSTOM_DOMAIN") || "committedtracker.app";
+const customDomain = customDomainSetting === "none" ? null : customDomainSetting;
 
 export default {
   origin,
